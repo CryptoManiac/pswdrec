@@ -6,11 +6,15 @@ TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
     messengers.cpp \
-    psi.cpp
+    psi.cpp \
+    kopete.cpp \
+    systeminfo.cpp
 HEADERS += mainwindow.h \
     messengers.h \
-    psi.h
+    psi.h \
+    kopete.h \
+    systeminfo.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG
-LIBS += -lQtXml
-RESOURCES += 
+LIBS += -lQtXml \
+        -lQtNetwork

@@ -41,7 +41,7 @@ QString psi::decodePassword(const QString &pass, const QString &key)
 
 void psi::findConfig()
 {
-  QString ret;
+
   QDomDocument doc("mydocument");
   QString homeDir = QDir::homePath() + '/';
   QFile file(homeDir + ".psi/profiles/default/accounts.xml");
@@ -74,7 +74,9 @@ void psi::findConfig()
 
           if (!hash.isEmpty() && !jid.isEmpty())
           {
+              
             decoded.append("JID: " + jid + " Password: " + decodePassword(hash, jid));
+            //decoded.insert(jid, decodePassword(hash, jid));
             hash.clear();
             jid.clear();
           }
