@@ -9,8 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
   Messengers* m = new Messengers();
-  m->QD();
-
+  ui->label->setText(m->QD());
 }
 
 
