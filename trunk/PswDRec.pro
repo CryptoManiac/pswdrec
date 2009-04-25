@@ -5,9 +5,11 @@ TARGET = PswDRec
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
-    messengers.cpp
+    messengers.cpp \
+    psi.cpp
 HEADERS += mainwindow.h \
-    messengers.h
+    messengers.h \
+    psi.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG
 LIBS += -lQtXml
