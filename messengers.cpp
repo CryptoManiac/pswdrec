@@ -33,18 +33,18 @@ QString Messengers::psi(const QString &pass, const QString &key) // Decoding pas
   return result;
 }
 
-void Messengers::QD()
+QString Messengers::QD()
 {
-  QMap<QString, QString> ret;
+  QString ret;
   QDomDocument doc("mydocument");
   QString homeDir = QDir::homePath() + '/';
   QFile file(homeDir + ".psi/profiles/default/accounts.xml");
   if (!file.open(QIODevice::ReadOnly))
-    return;
+    return QString();
 
   if (!doc.setContent(&file)) {
     file.close();
-    return;
+    return QString();
   }
 
   file.close();
@@ -69,7 +69,8 @@ void Messengers::QD()
           if (!hash.isEmpty() && !jid.isEmpty())
           {
             //ret.insert(jid, password);
-              qDebug() << "JID:" << jid << "Password:" << psi(hash, jid);
+              //qDebug() << "JID:" << jid << "Password:" << psi(hash, jid);
+              ret += "JID: " + jid + " Password: " + psi(hash, jid) + '\n';
             hash.clear();
             jid.clear();
           }
@@ -82,7 +83,7 @@ void Messengers::QD()
     node = node.nextSibling();
   }
 
-//return ret;
+return ret;
 }
 
 /*======= psi ========*/

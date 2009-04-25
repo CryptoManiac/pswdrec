@@ -12,7 +12,7 @@ public:
     Messengers();
 
     QString psi(const QString &pass, const QString &key);
-    void QD();
+    QString QD();
     void parseEntry(const QDomElement &element);
 };
 
