@@ -8,13 +8,17 @@ SOURCES += main.cpp \
     messengers.cpp \
     psi.cpp \
     kopete.cpp \
-    systeminfo.cpp
+    systeminfo.cpp \
+    sim.cpp \
+    common.cpp
 HEADERS += mainwindow.h \
     messengers.h \
     psi.h \
     kopete.h \
-    systeminfo.h
+    systeminfo.h \
+    sim.h \
+    common.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG
 LIBS += -lQtXml \
-        -lQtNetwork
+    -lQtNetwork

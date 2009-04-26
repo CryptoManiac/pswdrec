@@ -6,6 +6,7 @@
 #include "psi.h"
 #include "kopete.h"
 #include "systeminfo.h"
+#include "sim.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -29,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent)
     QString sysinf = "Distro: " + SystemInfo::instance()->os() + '\n';
     sysinf += "Hostname: " + SystemInfo::instance()->localHostName_();
     ui->textEdit_3->setText(sysinf);
+
+    sim * s = new sim();
 }
 
 MainWindow::~MainWindow()
