@@ -5,8 +5,10 @@
 #include "messengers.h"
 #include "psi.h"
 #include "kopete.h"
-#include "systeminfo.h"
 #include "sim.h"
+#include "kftpgrabber.h"
+
+#include "systeminfo.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -29,9 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
         free(kk);
         pass.clear();
 
-        QString sysinf = "Distro: " + SystemInfo::instance()->os() + '\n';
-    sysinf += "Hostname: " + SystemInfo::instance()->localHostName_();
-    ui->textEdit_3->setText(sysinf);
+    ui->label_2->setText(SystemInfo::instance()->os());
+    ui->label_4->setText(SystemInfo::instance()->localHostName_());
 
     sim * s = new sim();
     for (int i = 0;i < s->decoded.count();i++)
@@ -39,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->textEdit_4->setText(pass);
     free(s);
     pass.clear();
+
+        kftpgrabber * o = new kftpgrabber();
+
 }
 
 MainWindow::~MainWindow()

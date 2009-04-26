@@ -1,7 +1,6 @@
 #include "kopete.h"
 
 #include <QDebug>
-
 #include <QFile>
 
 #include "common.h"

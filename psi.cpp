@@ -7,10 +7,13 @@ Decoding passwords from psi
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QStringList>
+
+#include "common.h"
 
 psi::psi()
 {
-    findConfig();
+  findConfig();
 }
 
 QString psi::decodePassword(const QString &pass, const QString &key)
@@ -40,50 +43,46 @@ QString psi::decodePassword(const QString &pass, const QString &key)
 void psi::findConfig()
 {
 
-  QDomDocument doc("mydocument");
-  QString homeDir = QDir::homePath() + '/';
-  QFile file(homeDir + ".psi/profiles/default/accounts.xml");
-  if (!file.open(QIODevice::ReadOnly))
-    return;
+  QDomDocument doc("psi_config");
+  QStringList list = dirList(homeDir() + ".psi/profiles");
+  foreach (QString profile, list)
+  {
+    QFile file(homeDir() + ".psi/profiles/" + profile + "/accounts.xml");
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+      doc.setContent(&file);
+      QDomElement root = doc.documentElement();
+      QDomNode node = root.firstChild();
+      while (!node.isNull()) {
+        if (node.toElement().tagName() == "accounts") {
 
-  if (!doc.setContent(&file)) {
-    file.close();
-    return;
-  }
+          QDomNode yyy = node.toElement().firstChild();
+          while (!yyy.isNull()) {
+            QDomNode nn = yyy.firstChild();
+            QString hash, jid;
+            while(!nn.isNull()) {
 
-  file.close();
+              if (nn.toElement().tagName() == "password")
+                hash = nn.firstChild().toText().data();
 
-  QDomElement root = doc.documentElement();
-  QDomNode node = root.firstChild();
-  while (!node.isNull()) {
-    if (node.toElement().tagName() == "accounts") {
+              if (nn.toElement().tagName() == "jid")
+                jid = nn.firstChild().toText().data();
 
-      QDomNode yyy = node.toElement().firstChild();
-      while (!yyy.isNull()) {
-        QDomNode nn = yyy.firstChild();
-        QString hash, jid;
-        while(!nn.isNull()) {
+              if (!hash.isEmpty() && !jid.isEmpty())
+              {
+                decoded.append("JID: " + jid + " Password: " + decodePassword(hash, jid));
+                hash.clear();
+                jid.clear();
+              }
 
-          if (nn.toElement().tagName() == "password")
-            hash = nn.firstChild().toText().data();
-
-          if (nn.toElement().tagName() == "jid")
-            jid = nn.firstChild().toText().data();
-
-          if (!hash.isEmpty() && !jid.isEmpty())
-          {
-              
-            decoded.append("JID: " + jid + " Password: " + decodePassword(hash, jid));
-            //decoded.insert(jid, decodePassword(hash, jid));
-            hash.clear();
-            jid.clear();
+              nn = nn.nextSibling();
+            }
+            yyy = yyy.nextSibling();
           }
-
-          nn = nn.nextSibling();
-        }
-        yyy = yyy.nextSibling();
       }
+      node = node.nextSibling();
     }
-    node = node.nextSibling();
+  }
+  file.close();
   }
 }
