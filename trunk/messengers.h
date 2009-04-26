@@ -7,7 +7,6 @@ class Messengers : public QObject
 {
 public:
     Messengers();
-    QString kopete( const QString &str );
 };
 
 #endif // MESSENGERS_H

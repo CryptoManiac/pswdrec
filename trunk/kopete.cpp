@@ -2,7 +2,6 @@
 
 #include <QDebug>
 
-#include <QTextStream>
 #include <QFile>
 
 #include "common.h"
@@ -24,8 +23,6 @@ QString kopete::decodePassword(const QString &pass)
 
 void kopete::findConfig()
 {
- // QString homeDir = QDir::homePath() + '/';
-
   QFile file(homeDir() + ".kde4/share/config/kopeterc");
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
          return;
