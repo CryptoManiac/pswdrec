@@ -7,6 +7,8 @@ class sim : public QObject
 {
 public:
     sim();
+    void findConfig();
+    QList<QString> decoded;
 private:
     QString decodePassword(const QString &hash);
 };

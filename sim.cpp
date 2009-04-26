@@ -2,12 +2,13 @@
 
 #include <QDebug>
 #include <QStringList>
+#include <QFile>
 
 #include "common.h"
 
 sim::sim()
 {
-    decodePassword("$4337$4352$4322$434f$4339$435f");
+    findConfig();
 }
 
 QString sim::decodePassword(const QString &hash)
@@ -26,8 +27,36 @@ QString sim::decodePassword(const QString &hash)
             temp = p.toUShort(0,16);
         }
     }
-//    qDebug() << new_pswd;
-    QStringList tt = dirList("/home/lastik/.kde/share/apps/sim");
-
     return new_pswd;
+}
+
+void sim::findConfig()
+{
+    QStringList list = dirList(homeDir()+".kde/share/apps/sim");
+    foreach (QString s, list)
+    {
+     QFile file(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf");
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
+
+        QString login;
+        QString pass;
+        QTextStream in(&file);
+     while (!in.atEnd()) {
+         QString line = in.readLine();
+         line.truncate(line.length() - 1);
+         if (line.startsWith("ID="))
+         {
+            login = line.right(line.length() - 4);
+            decoded.append("Login: " + login + " Pass: " + pass);
+            pass.clear();
+            login.clear();
+         }
+
+         if (line.startsWith("Password="))
+            pass = decodePassword(line.right(line.length() - 10));
+
+     }
+ }
+    }
+
 }

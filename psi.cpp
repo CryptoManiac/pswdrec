@@ -3,8 +3,6 @@ Decoding passwords from psi
 */
 
 #include "psi.h"
-#include "messengers.h"
-
 
 #include <QFile>
 #include <QDir>

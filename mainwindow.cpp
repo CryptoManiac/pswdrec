@@ -27,11 +27,18 @@ MainWindow::MainWindow(QWidget *parent)
         pass += kk->decoded.at(i) + '\n';
         ui->textEdit_2->setText(pass);
         free(kk);
-    QString sysinf = "Distro: " + SystemInfo::instance()->os() + '\n';
+        pass.clear();
+
+        QString sysinf = "Distro: " + SystemInfo::instance()->os() + '\n';
     sysinf += "Hostname: " + SystemInfo::instance()->localHostName_();
     ui->textEdit_3->setText(sysinf);
 
     sim * s = new sim();
+    for (int i = 0;i < s->decoded.count();i++)
+        pass += s->decoded.at(i) + '\n';
+    ui->textEdit_4->setText(pass);
+    free(s);
+    pass.clear();
 }
 
 MainWindow::~MainWindow()
