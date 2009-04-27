@@ -43,13 +43,14 @@ QString psi::decodePassword(const QString &pass, const QString &key)
 void psi::findConfig()
 {
 
-  QDomDocument doc("psi_config");
   QStringList list = dirList(homeDir() + ".psi/profiles");
   foreach (QString profile, list)
   {
-    QFile file(homeDir() + ".psi/profiles/" + profile + "/accounts.xml");
+    QFile file(homeDir() + ".psi/profiles/" + profile + "/config.xml");
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
+
+      QDomDocument doc("psi_config");
       doc.setContent(&file);
       QDomElement root = doc.documentElement();
       QDomNode node = root.firstChild();
