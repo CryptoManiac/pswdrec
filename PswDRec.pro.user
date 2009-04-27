@@ -204,7 +204,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-TvvO7kRbb5,guid=59d9e15a74e03315b8f0890349f20a6b</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-R0ZZGl5OFs,guid=4a790ce8ec11c79176e1223949f4b8fb</value>
     <value type="QString" >DESKTOP_SESSION=kde</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
@@ -226,16 +226,16 @@
     <value type="QString" >PWD=/home/lastik/qtcreator-1.1.0/bin</value>
     <value type="QString" >QTDIR=/usr</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/lastik/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/lastik:/tmp/.ICE-unix/4586</value>
+    <value type="QString" >SESSION_MANAGER=local/lastik:/tmp/.ICE-unix/4475</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=4525</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-lEFEUC4491/agent.4491</value>
+    <value type="QString" >SSH_AGENT_PID=4413</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-MZQOik4379/agent.4379</value>
     <value type="QString" >USER=lastik</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=#kde_legacy#</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=e3f384f432fc9c100878249849a5ccb3-1240599146.650833-2138860737</value>
+    <value type="QString" >XDG_SESSION_COOKIE=e3f384f432fc9c100878249849a5ccb3-1240774907.44498-1931762351</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
@@ -245,7 +245,7 @@
     <value type="QString" >-r</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
-   <value key="abstractProcess.enabled" type="bool" >false</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
    <value key="abstractProcess.workingDirectory" type="QString" >/home/lastik/src/pswdrec</value>
    <value key="buildConfiguration" type="int" >0</value>
   </valuemap>
@@ -255,7 +255,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-TvvO7kRbb5,guid=59d9e15a74e03315b8f0890349f20a6b</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-R0ZZGl5OFs,guid=4a790ce8ec11c79176e1223949f4b8fb</value>
     <value type="QString" >DESKTOP_SESSION=kde</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
@@ -277,16 +277,16 @@
     <value type="QString" >PWD=/home/lastik/qtcreator-1.1.0/bin</value>
     <value type="QString" >QTDIR=/usr</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/lastik/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/lastik:/tmp/.ICE-unix/4586</value>
+    <value type="QString" >SESSION_MANAGER=local/lastik:/tmp/.ICE-unix/4475</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=4525</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-lEFEUC4491/agent.4491</value>
+    <value type="QString" >SSH_AGENT_PID=4413</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-MZQOik4379/agent.4379</value>
     <value type="QString" >USER=lastik</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=#kde_legacy#</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=e3f384f432fc9c100878249849a5ccb3-1240599146.650833-2138860737</value>
+    <value type="QString" >XDG_SESSION_COOKIE=e3f384f432fc9c100878249849a5ccb3-1240774907.44498-1931762351</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
