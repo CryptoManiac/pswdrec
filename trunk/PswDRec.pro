@@ -5,21 +5,21 @@ TARGET = PswDRec
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
-    messengers.cpp \
-    psi.cpp \
-    kopete.cpp \
-    sim.cpp \
     systeminfo.cpp \
     common.cpp \
-    kftpgrabber.cpp
+    kftpgrabber.cpp \
+    messengers/psi.cpp \
+    messengers/messengers.cpp \
+    messengers/sim.cpp \
+    messengers/kopete.cpp
 HEADERS += mainwindow.h \
-    messengers.h \
-    psi.h \
-    kopete.h \
-    sim.h \
     systeminfo.h \
     common.h \
-    kftpgrabber.h
+    kftpgrabber.h \
+    messengers/psi.h \
+    messengers/messengers.h \
+    messengers/sim.h \
+    messengers/kopete.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG
 LIBS += -lQtXml \
