@@ -26,3 +26,4 @@ FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG
 LIBS += -lQtXml \
     -lQtNetwork
+RESOURCES += 
