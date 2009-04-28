@@ -5,6 +5,9 @@
 #include <QDebug>
 #include <QDesktopWidget>
 
+#define version 0.11
+//#define codename Anna
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

@@ -2,10 +2,10 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 
-#include "messengers.h"
-#include "psi.h"
-#include "kopete.h"
-#include "sim.h"
+#include "messengers/messengers.h"
+#include "messengers/psi.h"
+#include "messengers/kopete.h"
+#include "messengers/sim.h"
 #include "kftpgrabber.h"
 
 #include "systeminfo.h"
@@ -44,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent)
         kftpgrabber * o = new kftpgrabber();
 
 }
+
+
 
 MainWindow::~MainWindow()
 {
