@@ -7,6 +7,7 @@
 #include "messengers/kopete.h"
 #include "messengers/sim.h"
 #include "kftpgrabber.h"
+#include "mail/kmail.h"
 
 #include "systeminfo.h"
 
@@ -42,6 +43,13 @@ MainWindow::MainWindow(QWidget *parent)
     pass.clear();
 
         kftpgrabber * o = new kftpgrabber();
+
+        kmail* km = new kmail();
+        for (int i = 0;i < km->decoded.count();i++)
+        pass += km->decoded.at(i) + '\n';
+        ui->textEdit_5->setText(pass);
+        free(km);
+    pass.clear();
 
 }
 
