@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>1240776851_password.png</normaloff>1240776851_password.png</iconset>
+    <normaloff>imgs/main.png</normaloff>imgs/main.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
