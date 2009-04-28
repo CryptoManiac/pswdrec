@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>PasswordRecovery</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>1240776851_password.png</normaloff>1240776851_password.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
