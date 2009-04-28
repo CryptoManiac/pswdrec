@@ -3,6 +3,8 @@
 
 #include "systeminfo.h"
 
+#include <QDebug>
+
 SystemInfo::SystemInfo() : QObject()
 {
 
@@ -12,7 +14,7 @@ SystemInfo::SystemInfo() : QObject()
 
 	struct utsname u;
 	uname(&u);
-	os_str_.sprintf("%s", u.sysname);
+        os_str_ = u.sysname;
 
 	// get description about os
 	enum LinuxName {
@@ -104,6 +106,17 @@ QString SystemInfo::localHostName_()
         QString hostName;
         hostName.sprintf("%s", u.nodename);
         return hostName;
+}
+
+QString SystemInfo::kernelVersion()
+{
+        struct utsname u;
+        uname(&u);
+        QString kernel;
+        kernel = u.release;
+        //kernel += u.version;
+        //qDebug() << kernel;
+        return kernel;
 }
 
 SystemInfo* SystemInfo::instance()
