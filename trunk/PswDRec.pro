@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     messengers/psi.cpp \
     messengers/messengers.cpp \
     messengers/sim.cpp \
-    messengers/kopete.cpp
+    messengers/kopete.cpp \
+    mail/kmail.cpp
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -19,7 +20,8 @@ HEADERS += mainwindow.h \
     messengers/psi.h \
     messengers/messengers.h \
     messengers/sim.h \
-    messengers/kopete.h
+    messengers/kopete.h \
+    mail/kmail.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG
 LIBS += -lQtXml \
