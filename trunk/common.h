@@ -7,11 +7,4 @@
 QStringList dirList(const QString &directory);
 QString homeDir();
 
-/*
-class common : public QObject
-{
-public:
-    common();
-}; */
-
 #endif // COMMON_H

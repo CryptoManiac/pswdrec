@@ -1,8 +1,8 @@
 #include "sim.h"
 
-#include <QDebug>
 #include <QStringList>
 #include <QFile>
+#include <QTextStream>
 
 #include "common.h"
 

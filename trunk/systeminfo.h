@@ -2,7 +2,6 @@
 #define SYSTEMINFO_H
 
 #include <QObject>
-#include <QString>
 
 class SystemInfo : public QObject
 {

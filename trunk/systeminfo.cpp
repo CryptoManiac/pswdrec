@@ -1,11 +1,9 @@
 #include <QFileInfo>
-#include <QCoreApplication>
-
 #include <sys/utsname.h>
 
 #include "systeminfo.h"
 
-SystemInfo::SystemInfo() : QObject(QCoreApplication::instance())
+SystemInfo::SystemInfo() : QObject()
 {
 
         os_str_ = "Unknown";

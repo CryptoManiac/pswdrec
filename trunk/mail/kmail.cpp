@@ -1,7 +1,7 @@
 #include "kmail.h"
 
-#include <QDebug>
 #include <QFile>
+#include <QTextStream>
 
 #include "common.h"
 
