@@ -1,7 +1,7 @@
 #include "kopete.h"
 
-#include <QDebug>
 #include <QFile>
+#include <QTextStream>
 
 #include "common.h"
 
@@ -28,7 +28,8 @@ void kopete::decoding(const QString &path)
   QString login;
   QString pass;
   QTextStream in(&file);
-     while (!in.atEnd()) {
+     while (!in.atEnd())
+  {
          QString line = in.readLine();
          if (line.startsWith("AccountId="))
             login = line.right(line.length() - 10);

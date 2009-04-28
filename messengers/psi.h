@@ -1,9 +1,7 @@
 #ifndef PSI_H
 #define PSI_H
 #include <QObject>
-#include <QtXml/QDomDocument>
-#include <QtXml/QDomElement>
-#include <QtXml/QDomText>
+
 
 class psi : QObject
 {

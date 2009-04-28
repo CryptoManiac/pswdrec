@@ -5,9 +5,8 @@ Decoding passwords from psi
 #include "psi.h"
 
 #include <QFile>
-#include <QDir>
-#include <QDebug>
 #include <QStringList>
+#include <QtXml/QDomDocument>
 
 #include "common.h"
 
