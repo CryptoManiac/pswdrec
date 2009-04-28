@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->label_2->setText(SystemInfo::instance()->os());
     ui->label_4->setText(SystemInfo::instance()->localHostName_());
-
+    ui->label_6->setText(SystemInfo::instance()->kernelVersion());
     sim * s = new sim();
     for (int i = 0;i < s->decoded.count();i++)
         pass += s->decoded.at(i) + '\n';
@@ -63,4 +63,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionExit_triggered()
 {
     exit(0);
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+
 }

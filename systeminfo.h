@@ -9,6 +9,7 @@ public:
 	static SystemInfo* instance();
 	const QString& os() const { return os_str_; }
         QString localHostName_();
+        QString kernelVersion();
 private:
 	SystemInfo();
 
