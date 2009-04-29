@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
         ui->textEdit_5->setText(pass);
         free(km);
     pass.clear();
-
 }
 
 
