@@ -114,8 +114,6 @@ QString SystemInfo::kernelVersion()
         uname(&u);
         QString kernel;
         kernel = u.release;
-        //kernel += u.version;
-        //qDebug() << kernel;
         return kernel;
 }
 
