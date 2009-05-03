@@ -39,13 +39,9 @@ QString psi::decodePassword(const QString &pass, const QString &key)
   return result;
 }
 
-void psi::findConfig()
+void psi::decoding(const QString &path)
 {
-
-  QStringList list = dirList(homeDir() + ".psi/profiles");
-  foreach (QString profile, list)
-  {
-    QFile file(homeDir() + ".psi/profiles/" + profile + "/config.xml");
+        QFile file(path);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
 
@@ -83,6 +79,21 @@ void psi::findConfig()
       node = node.nextSibling();
     }
   }
-  file.close();
+}
+
+
+void psi::findConfig()
+{
+
+  QStringList list = dirList(homeDir() + ".psi/profiles");
+  foreach (QString profile, list)
+  {
+      QFile file(homeDir() + ".psi/profiles/" + profile + "/config.xml");
+        if (file.exists())
+      decoding(file.fileName());
+        file.setFileName(homeDir() + ".psi/profiles/" + profile + "/accounts.xml");
+      if (file.exists())
+      decoding(file.fileName());
   }
+
 }

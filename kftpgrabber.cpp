@@ -4,7 +4,7 @@
 
 kftpgrabber::kftpgrabber()
 {
-    qDebug() << decodePassword("cmVwbXZm");
+    //qDebug() << decodePassword("");
 }
 
 QString kftpgrabber::decodePassword(const QString& password)
