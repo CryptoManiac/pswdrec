@@ -38,13 +38,15 @@ SystemInfo::SystemInfo() : QObject()
 		LinuxArch
 	};
 
-	enum OsFlags {
+        enum OsFlags
+        {
 		OsUseName = 0,
 		OsUseFile,
 		OsAppendFile
 	};
 
-	struct OsInfo {
+        struct OsInfo
+        {
 		LinuxName id;
 		OsFlags flags;
 		QString file;
@@ -70,9 +72,11 @@ SystemInfo::SystemInfo() : QObject()
 		{ LinuxNone,		OsUseName,	"",				""			}
 	};
 
-	for (int i = 0; osInfo[i].id != LinuxNone; i++) {
+        for (int i = 0; osInfo[i].id != LinuxNone; i++)
+        {
 		QFileInfo fi( osInfo[i].file );
-		if ( fi.exists() ) {
+                if ( fi.exists() )
+                {
 			char buffer[128];
 
 			QFile f( osInfo[i].file );
@@ -82,7 +86,8 @@ SystemInfo::SystemInfo() : QObject()
 
                         desc = desc.trimmed ();
 
-			switch ( osInfo[i].flags ) {
+                        switch ( osInfo[i].flags )
+                        {
 				case OsUseFile:
 					os_str_ = desc;
 					break;
