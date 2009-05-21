@@ -42,7 +42,7 @@ void psi::decoding(const QString &path)
     QFile file(path);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QDomDocument doc("psi_config");
+        QDomDocument doc;
         doc.setContent(&file);
         QDomElement root = doc.documentElement();
         QDomNode node = root.firstChild();

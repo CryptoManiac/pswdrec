@@ -7,6 +7,7 @@
 #include <QStringList>
 #include <QTextStream>
 #include <QDebug>
+#include <QSettings>
 
 #include "common.h"
 
@@ -14,7 +15,6 @@ sim::sim():QObject() {
     root = decoded.createElement("sim");
     decoded.appendChild(root);
     findConfig();
-    qDebug()<< decoded.toString();
 }
 
 QString decodePassword(const QString &hash) {
@@ -34,9 +34,10 @@ QString decodePassword(const QString &hash) {
     return result;
 }
 
-void sim::createXML(QString &login, QString &pass) {
-QDomElement q = decoded.createElement("Account");
-root.appendChild(q);
+void sim::createXML(QString login, QString pass, QString server) {
+    QDomElement q = decoded.createElement("Account");
+    root.appendChild(q);
+
     QDomElement tag = decoded.createElement("Login");
     q.appendChild(tag);
     QDomText t = decoded.createTextNode(login);
@@ -46,25 +47,27 @@ root.appendChild(q);
     q.appendChild(tag);
     t = decoded.createTextNode(pass);
     tag.appendChild(t);
+    if (!server.isEmpty()) {
+        tag = decoded.createElement("Server");
+        q.appendChild(tag);
+        t = decoded.createTextNode(server);
+        tag.appendChild(t);
+    }
 }
 
 void sim::decoding(QFile &file) {
-    QString login, pass;
-    QTextStream in(&file);
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-        line.truncate(line.length() - 1);
-        if (line.startsWith("ID=") || line.startsWith("Screen=")) {
-            login = line.right(line.length() - 4);
-            createXML(login, pass);
-            pass.clear();
-            login.clear();
-        }
+    QSettings c(file.fileName(), QSettings::IniFormat);
+    c.beginGroup("jabber/Jabber");
+    createXML(c.value("ID").toString(), decodePassword(c.value("Password").toString()), c.value("Server").toString());
+    c.endGroup();
 
-        if (line.startsWith("Password="))
-            pass = decodePassword(line.right(line.length() - 10));
+    c.beginGroup("icq/AIM");
+    createXML(c.value("Screen").toString(), decodePassword(c.value("Password").toString()), QString());
+    c.endGroup();
 
-    }
+    c.beginGroup("msn/MSN");
+    createXML(c.value("EMail").toString(), decodePassword(c.value("Password").toString()), QString());
+    c.endGroup();
 }
 
 void sim::findConfig() {
@@ -74,6 +77,7 @@ void sim::findConfig() {
         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             decoding(file);
     }
+
 }
 
 sim* sim::instance() {

@@ -12,7 +12,8 @@ public:
     void findConfig();
     QDomDocument decoded;
     void decoding(QFile&);
-    void createXML(QString &, QString &);
+    void createXML(QString, QString, QString);
+
 private:
         sim();
         static sim* instance_;
