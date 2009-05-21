@@ -23,7 +23,8 @@ HEADERS += mainwindow.h \
     messengers/kopete.h \
     mail/kmail.h
 FORMS += mainwindow.ui
-OTHER_FILES += CHANGELOG
+OTHER_FILES += CHANGELOG \
+            messengers
 LIBS += -lQtXml \
     -lQtNetwork
 RESOURCES += 

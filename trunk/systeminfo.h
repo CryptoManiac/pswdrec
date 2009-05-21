@@ -2,19 +2,16 @@
 #define SYSTEMINFO_H
 
 #include <QObject>
+#include <QtXml/QDomDocument>
 
 class SystemInfo : public QObject
 {
 public:
 	static SystemInfo* instance();
-	const QString& os() const { return os_str_; }
-        QString localHostName_();
-        QString kernelVersion();
+        QDomDocument collect();
 private:
 	SystemInfo();
-
 	static SystemInfo* instance_;
-	QString os_str_;
 };
 
 #endif

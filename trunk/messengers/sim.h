@@ -2,15 +2,21 @@
 #define SIM_H
 
 #include <QObject>
+#include <QFile>
+#include <QtXml/QDomDocument>
 
 class sim : public QObject
 {
 public:
-    sim();
+    static sim* instance();
     void findConfig();
-    QList<QString> decoded;
+    QDomDocument decoded;
+    void decoding(QFile&);
+    void createXML(QString &, QString &);
 private:
-    QString decodePassword(const QString &hash);
+        sim();
+        static sim* instance_;
+        QDomElement root;
 };
 
 #endif // SIM_H
