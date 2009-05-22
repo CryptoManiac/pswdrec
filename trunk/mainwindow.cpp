@@ -6,6 +6,7 @@
 #include "messengers/psi.h"
 #include "messengers/kopete.h"
 #include "messengers/sim.h"
+#include "messengers/mdc.h"
 #include "kftpgrabber.h"
 #include "mail/kmail.h"
 
@@ -45,7 +46,10 @@ MainWindow::MainWindow(QWidget *parent)
      * free(km);
      * pass.clear();*/
 
-    QDomDocument fsim = sim::instance()->decoded;
+    mdc *m = new mdc();
+
+
+    QDomDocument fsim = m->decoded;//sim::instance()->decoded;
     QDomNode nRoot = fsim.documentElement().firstChild();
 
     while (!nRoot.isNull()){
