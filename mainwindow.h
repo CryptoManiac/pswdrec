@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QtGui/QMainWindow>
+#include <QtXml/QDomDocument>
+#include <QTextBrowser>
 
 namespace Ui
 {
@@ -18,6 +20,8 @@ public:
     void getSystemInfo();
 private:
     Ui::MainWindow *ui;
+
+void Parser(QDomDocument qDoc, QTextBrowser *qBrwsr);
 
 private slots:
     void on_actionExit_triggered();

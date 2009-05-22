@@ -46,11 +46,14 @@ MainWindow::MainWindow(QWidget *parent)
      * free(km);
      * pass.clear();*/
 
-    mdc *m = new mdc();
+    Parser(sim::instance()->decoded, ui->textBrowser_2);
+    Parser(mdc::instance()->decoded, ui->textBrowser_3);
 
+}
 
-    QDomDocument fsim = m->decoded;//sim::instance()->decoded;
-    QDomNode nRoot = fsim.documentElement().firstChild();
+void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
+{
+    QDomNode nRoot = qDoc.documentElement().firstChild();
 
     while (!nRoot.isNull()){
 
@@ -58,13 +61,11 @@ MainWindow::MainWindow(QWidget *parent)
             QString sInfo;
             sInfo += "<b>" + nRoot.childNodes().at(i).toElement().tagName() + ": </b>";
             sInfo += nRoot.childNodes().at(i).toElement().text();
-            ui->textBrowser_2->insertHtml(sInfo + " ");
+            qBrwsr->insertHtml(sInfo + " ");
         }
-        ui->textBrowser_2->insertHtml("<br>");
+        qBrwsr->insertHtml("<br>");
         nRoot = nRoot.nextSiblingElement();
     }
-
-
 }
 
 void MainWindow::getSystemInfo() {

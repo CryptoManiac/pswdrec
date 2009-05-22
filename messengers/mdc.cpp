@@ -8,6 +8,8 @@
 
 mdc::mdc()
 {
+    root = decoded.createElement("mdc");
+    decoded.appendChild(root);
     findConfig();
 }
 
@@ -25,6 +27,21 @@ void mdc::findConfig()
 
 }
 
+void mdc::createXML(QString &login, QString &pass) {
+
+    QDomElement q = decoded.createElement("Account");
+    root.appendChild(q);
+
+    QDomElement tag = decoded.createElement("Login");
+    q.appendChild(tag);
+    QDomText t = decoded.createTextNode(login);
+    tag.appendChild(t);
+
+    tag = decoded.createElement("Password");
+    q.appendChild(tag);
+    t = decoded.createTextNode(pass);
+    tag.appendChild(t);
+}
 
 void mdc::decoding(const QString &path)
 {
@@ -32,7 +49,31 @@ void mdc::decoding(const QString &path)
     if (file.open(QIODevice::ReadOnly))
     {
             QByteArray text = QByteArray::fromBase64(file.readAll());
-            decoded.setContent(text);
-            qDebug() << decoded.toString();
+            QDomDocument tempDoc;
+            tempDoc.setContent(text);
+
+            QDomNode nRoot = tempDoc.documentElement().firstChild();
+
+    while (!nRoot.isNull()){
+        QString login, pass;
+        for (int i = 0;i < nRoot.childNodes().count();i++) {
+        if (nRoot.childNodes().at(i).toElement().tagName() == "key")
+            login = nRoot.childNodes().at(i).toElement().text();
+    if (nRoot.childNodes().at(i).toElement().tagName() == "value")
+            pass = nRoot.childNodes().at(i).toElement().text();
+    }
+        createXML(login, pass);
+        nRoot = nRoot.nextSiblingElement();
+    }
+
+
     }
 }
+
+mdc* mdc::instance() {
+    if (!instance_)
+        instance_ = new mdc();
+    return instance_;
+}
+
+mdc* mdc::instance_ = NULL;
