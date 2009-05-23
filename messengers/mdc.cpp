@@ -1,8 +1,8 @@
 #include "mdc.h"
 
-#include <QFile>
-#include <QStringList>
 #include <QDebug>
+#include <QStringList>
+#include <QFile>
 
 #include "common.h"
 
@@ -13,14 +13,11 @@ mdc::mdc() {
 }
 
 void mdc::findConfig() {
-    QStringList list = dirList(homeDir() + ".MDC");
-    foreach(QString profile, list) {
+    foreach(QString profile, dirList(homeDir() + ".MDC")) {
         QFile file(homeDir() + ".MDC/" + profile + "/ss.scs");
-        if (file.exists()) {
-            decoding(file.fileName());
-        }
+        if (file.open(QIODevice::ReadOnly))
+            decoding(file);
     }
-
 }
 
 void mdc::createXML(QString &login, QString &pass, QString &proto) {
@@ -44,10 +41,8 @@ void mdc::createXML(QString &login, QString &pass, QString &proto) {
     tag.appendChild(t);
 }
 
-void mdc::decoding(const QString &path) {
-    QFile file(path);
-    if (file.open(QIODevice::ReadOnly)) {
-        QByteArray text = QByteArray::fromBase64(file.readAll());
+void mdc::decoding(QFile &path) {
+        QByteArray text = QByteArray::fromBase64(path.readAll());
         QDomDocument tempDoc;
         tempDoc.setContent(text);
 
@@ -68,10 +63,7 @@ void mdc::decoding(const QString &path) {
             createXML(login, pass, proto);
             nRoot = nRoot.nextSiblingElement();
         }
-
-
     }
-}
 
 mdc* mdc::instance() {
     if (!instance_)

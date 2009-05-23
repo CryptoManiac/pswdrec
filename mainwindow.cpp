@@ -28,12 +28,14 @@ MainWindow::MainWindow(QWidget *parent)
      * free(p);
      * pass.clear();
      *
-     * kopete* kk = new kopete();
-     * for (int i = 0;i<kk->decoded.count();i++)
-     * pass += kk->decoded.at(i) + '\n';
-     * ui->textEdit_2->setText(pass);
-     * free(kk);
-     * pass.clear();*/
+     */
+    /*QString pass;
+    kopete* kk = new kopete();
+      for (int i = 0;i<kk->decoded.count();i++)
+      pass += kk->decoded.at(i) + '\n';
+      ui->textEdit_2->setText(pass);
+      free(kk);
+      pass.clear();//*/
 
 
     /*
@@ -48,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     Parser(sim::instance()->decoded, ui->textBrowser_2);
     Parser(mdc::instance()->decoded, ui->textBrowser_3);
+    qDebug() << kopete::instance()->decoded.toString();
+    Parser(kopete::instance()->decoded, ui->textBrowser_4);
 
 }
 
@@ -70,6 +74,7 @@ void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
 
 void MainWindow::getSystemInfo() {
     QDomDocument sysInfo = SystemInfo::instance()->collect();
+
     QDomElement root = sysInfo.firstChildElement();
     for (int i = 0;i < root.childNodes().count();i++) {
         QString sInfo;
