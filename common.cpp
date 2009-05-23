@@ -12,6 +12,14 @@ QStringList dirList(const QString &directory)
     return dir.entryList().count() ? dir.entryList() : QStringList();
  }
 
+QStringList dirListFiles(const QString &directory, QStringList filter)
+{
+    QDir dir(directory);
+    dir.setFilter(QDir::Files | QDir::NoSymLinks);
+    dir.setNameFilters(filter);
+    return dir.entryList().count() ? dir.entryList() : QStringList();
+}
+
 QString homeDir()
 {
       return QDir::homePath() + '/';
