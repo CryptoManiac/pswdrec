@@ -5,7 +5,6 @@
 #include "sim.h"
 
 #include <QStringList>
-#include <QDebug>
 #include <QSettings>
 
 #include "common.h"
@@ -47,6 +46,7 @@ void sim::createXML(QString login, QString pass, QString server) {
     q.appendChild(tag);
     t = decoded.createTextNode(pass);
     tag.appendChild(t);
+
     if (!server.isEmpty()) {
         tag = decoded.createElement("Server");
         q.appendChild(tag);

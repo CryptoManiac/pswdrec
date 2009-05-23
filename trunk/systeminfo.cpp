@@ -1,10 +1,7 @@
-#include <QFileInfo>
 #include <sys/utsname.h>
 
 #include "systeminfo.h"
-
-#include <QDebug>
-#include <QtXml/QDomDocument>
+#include <QFile>
 
 SystemInfo::SystemInfo() : QObject() {
 }
@@ -74,8 +71,7 @@ QString getOS() {
     };
 
     for (int i = 0; osInfo[i].id != LinuxNone; i++) {
-        QFileInfo fi( osInfo[i].file );
-        if ( fi.exists() ) {
+        if ( QFile::exists(osInfo[i].file) ) {
             char buffer[128];
 
             QFile f( osInfo[i].file );
@@ -85,7 +81,7 @@ QString getOS() {
 
             desc = desc.trimmed();
 
-            switch ( osInfo[i].flags ) {
+            switch (osInfo[i].flags) {
                 case OsUseFile:
                     os_str_ = desc;
                     break;

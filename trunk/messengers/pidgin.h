@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtXml/QDomDocument>
+#include <QFile>
 
 class pidgin : public QObject
 {

@@ -1,23 +1,22 @@
-#ifndef SIM_H
-#define SIM_H
+#ifndef GAJIM_H
+#define GAJIM_H
 
 #include <QObject>
-#include <QFile>
 #include <QtXml/QDomDocument>
 
-class sim : public QObject
+class gajim : public QObject
 {
 public:
-    static sim* instance();
+    static gajim* instance();
     QDomDocument decoded;
 
 private:
-    sim();
-    static sim* instance_;
+    gajim();
+    static gajim* instance_;
     QDomElement root;
     void decoding(QString);
     void createXML(QString, QString, QString);
     void findConfig();
 };
 
-#endif // SIM_H
+#endif // GAJIM_H
