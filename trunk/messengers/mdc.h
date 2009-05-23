@@ -12,7 +12,7 @@ public:
     void findConfig();
     void decoding(const QString &);
         QDomDocument decoded;
-        void createXML(QString &, QString &);
+        void createXML(QString &, QString &, QString &);
 private:
   static mdc* instance_;
           QDomElement root;

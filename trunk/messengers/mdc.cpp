@@ -6,28 +6,24 @@
 
 #include "common.h"
 
-mdc::mdc()
-{
+mdc::mdc() {
     root = decoded.createElement("mdc");
     decoded.appendChild(root);
     findConfig();
 }
 
-void mdc::findConfig()
-{
+void mdc::findConfig() {
     QStringList list = dirList(homeDir() + ".MDC");
-    foreach (QString profile, list)
-    {
+    foreach(QString profile, list) {
         QFile file(homeDir() + ".MDC/" + profile + "/ss.scs");
-        if (file.exists())
-        {
+        if (file.exists()) {
             decoding(file.fileName());
         }
     }
 
 }
 
-void mdc::createXML(QString &login, QString &pass) {
+void mdc::createXML(QString &login, QString &pass, QString &proto) {
 
     QDomElement q = decoded.createElement("Account");
     root.appendChild(q);
@@ -41,30 +37,37 @@ void mdc::createXML(QString &login, QString &pass) {
     q.appendChild(tag);
     t = decoded.createTextNode(pass);
     tag.appendChild(t);
+
+    tag = decoded.createElement("Protocol");
+    q.appendChild(tag);
+    t = decoded.createTextNode(proto);
+    tag.appendChild(t);
 }
 
-void mdc::decoding(const QString &path)
-{
+void mdc::decoding(const QString &path) {
     QFile file(path);
-    if (file.open(QIODevice::ReadOnly))
-    {
-            QByteArray text = QByteArray::fromBase64(file.readAll());
-            QDomDocument tempDoc;
-            tempDoc.setContent(text);
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray text = QByteArray::fromBase64(file.readAll());
+        QDomDocument tempDoc;
+        tempDoc.setContent(text);
 
-            QDomNode nRoot = tempDoc.documentElement().firstChild();
+        QDomNode nRoot = tempDoc.documentElement().firstChild();
 
-    while (!nRoot.isNull()){
-        QString login, pass;
-        for (int i = 0;i < nRoot.childNodes().count();i++) {
-        if (nRoot.childNodes().at(i).toElement().tagName() == "key")
-            login = nRoot.childNodes().at(i).toElement().text();
-    if (nRoot.childNodes().at(i).toElement().tagName() == "value")
-            pass = nRoot.childNodes().at(i).toElement().text();
-    }
-        createXML(login, pass);
-        nRoot = nRoot.nextSiblingElement();
-    }
+        while (!nRoot.isNull()) {
+            QString login, pass, proto;
+            for (int i = 0;i < nRoot.childNodes().count();i++) {
+                if (nRoot.childNodes().at(i).toElement().tagName() == "key") {
+                    login = nRoot.childNodes().at(i).toElement().text();
+                    proto = login.left(login.indexOf("://"));
+                    login = login.right(login.length() - login.indexOf("://") - 3);
+                }
+
+                if (nRoot.childNodes().at(i).toElement().tagName() == "value")
+                    pass = nRoot.childNodes().at(i).toElement().text();
+            }
+            createXML(login, pass, proto);
+            nRoot = nRoot.nextSiblingElement();
+        }
 
 
     }

@@ -155,7 +155,7 @@
     </widget>
     <widget class="QWidget" name="tab_7">
      <attribute name="title">
-      <string>Page</string>
+      <string>MDC</string>
      </attribute>
      <widget class="QTextBrowser" name="textBrowser_3">
       <property name="geometry">
