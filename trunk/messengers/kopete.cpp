@@ -17,8 +17,7 @@ kopete::kopete() {
     findConfig();
 }
 
-QString kopete::decodePassword(QString pass)
-{
+QString kopete::decodePassword(QString pass) {
     QString result;
     const QChar *unicode = pass.unicode();
     for (int i = 0; i < pass.length(); ++i)
@@ -26,18 +25,16 @@ QString kopete::decodePassword(QString pass)
     return result;
 }
 
-void kopete::decoding(QString path)
-{
+void kopete::decoding(QString path) {
     QSettings set(path, QSettings::IniFormat);
-    foreach (QString str, set.childGroups())
-    {
+    foreach(QString str, set.childGroups()) {
         if (str.startsWith("Account_")) {
-         set.beginGroup(str);
-         QString login = set.value("AccountID").toString();
-         QString pass = decodePassword(set.value("Password").toString());
-         QString server = set.value("Server").toString();
-         createXML(login, pass, server);
-         set.endGroup();
+            set.beginGroup(str);
+            QString login = set.value("AccountID").toString();
+            QString pass = decodePassword(set.value("Password").toString());
+            QString server = set.value("Server").toString();
+            createXML(login, pass, server);
+            set.endGroup();
         }
     }
 }
@@ -63,8 +60,7 @@ void kopete::createXML(QString login, QString pass, QString server) {
     }
 }
 
-void kopete::findConfig()
-{
+void kopete::findConfig() {
 
     if (QFile::exists(homeDir() + ".kde4/share/config/kopeterc"))
         decoding(homeDir() + ".kde4/share/config/kopeterc");
