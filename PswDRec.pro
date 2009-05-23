@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     mail/kmail.cpp \
     messengers/mdc.cpp \
     messengers/licq.cpp \
-    messengers/alicq.cpp
+    messengers/alicq.cpp \
+    messengers/pidgin.cpp
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -27,7 +28,8 @@ HEADERS += mainwindow.h \
     mail/kmail.h \
     messengers/mdc.h \
     messengers/licq.h \
-    messengers/alicq.h
+    messengers/alicq.h \
+    messengers/pidgin.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     messengers
