@@ -34,7 +34,7 @@ HEADERS += mainwindow.h \
     messengers/gajim.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
-    messengers
+    COPYING
 LIBS += -lQtXml \
     -lQtNetwork
 RESOURCES += 
