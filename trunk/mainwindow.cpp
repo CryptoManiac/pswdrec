@@ -9,6 +9,7 @@
 #include "messengers/mdc.h"
 #include "messengers/licq.h"
 #include "messengers/alicq.h"
+#include "messengers/pidgin.h"
 #include "kftpgrabber.h"
 #include "mail/kmail.h"
 
@@ -31,14 +32,6 @@ MainWindow::MainWindow(QWidget *parent)
      * pass.clear();
      *
      */
-    /*QString pass;
-    kopete* kk = new kopete();
-      for (int i = 0;i<kk->decoded.count();i++)
-      pass += kk->decoded.at(i) + '\n';
-      ui->textEdit_2->setText(pass);
-      free(kk);
-      pass.clear();//*/
-
 
     /*
      * kftpgrabber * o = new kftpgrabber();
@@ -55,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(kopete::instance()->decoded, ui->textBrowser_4);
     Parser(licq::instance()->decoded, ui->textBrowser_5);
     Parser(alicq::instance()->decoded, ui->textBrowser_6);
+    Parser(pidgin::instance()->decoded, ui->textBrowser_7);
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
