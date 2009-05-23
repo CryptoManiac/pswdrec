@@ -7,6 +7,7 @@
 #include "messengers/kopete.h"
 #include "messengers/sim.h"
 #include "messengers/mdc.h"
+#include "messengers/licq.h"
 #include "kftpgrabber.h"
 #include "mail/kmail.h"
 
@@ -50,9 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     Parser(sim::instance()->decoded, ui->textBrowser_2);
     Parser(mdc::instance()->decoded, ui->textBrowser_3);
-    qDebug() << kopete::instance()->decoded.toString();
     Parser(kopete::instance()->decoded, ui->textBrowser_4);
-
+    Parser(licq::instance()->decoded, ui->textBrowser_5);
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)

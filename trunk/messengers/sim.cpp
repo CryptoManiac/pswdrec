@@ -34,6 +34,7 @@ QString decodePassword(const QString &hash) {
 }
 
 void sim::createXML(QString login, QString pass, QString server) {
+    if (!login.isEmpty() && !pass.isEmpty()){
     QDomElement q = decoded.createElement("Account");
     root.appendChild(q);
 
@@ -52,6 +53,7 @@ void sim::createXML(QString login, QString pass, QString server) {
         t = decoded.createTextNode(server);
         tag.appendChild(t);
     }
+}
 }
 
 void sim::decoding(QString file) {

@@ -18,6 +18,6 @@ private:
     void decoding(QString);
     void createXML(QString, QString, QString);
     void findConfig();
-    };
+};
 
 #endif // SIM_H
