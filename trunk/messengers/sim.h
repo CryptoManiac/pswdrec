@@ -9,15 +9,15 @@ class sim : public QObject
 {
 public:
     static sim* instance();
-    void findConfig();
     QDomDocument decoded;
-    void decoding(QFile&);
-    void createXML(QString, QString, QString);
 
 private:
         sim();
         static sim* instance_;
         QDomElement root;
-};
+    void decoding(QString);
+    void createXML(QString, QString, QString);
+    void findConfig();
+    };
 
 #endif // SIM_H

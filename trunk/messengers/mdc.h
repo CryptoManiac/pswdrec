@@ -3,19 +3,21 @@
 
 #include <QObject>
 #include <QtXml/QDomDocument>
+#include <QFile>
 
 class mdc : public QObject
 {
 public:
     mdc();
-   static mdc* instance();
-    void findConfig();
-    void decoding(const QString &);
-        QDomDocument decoded;
-        void createXML(QString &, QString &, QString &);
+    static mdc* instance();
+    QDomDocument decoded;
+
 private:
-  static mdc* instance_;
-          QDomElement root;
+    static mdc* instance_;
+    QDomElement root;
+    void findConfig();
+    void decoding(QFile &);
+    void createXML(QString &, QString &, QString &);
 };
 
 #endif // MDC_H

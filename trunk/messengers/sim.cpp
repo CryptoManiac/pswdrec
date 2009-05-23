@@ -5,13 +5,12 @@
 #include "sim.h"
 
 #include <QStringList>
-#include <QTextStream>
 #include <QDebug>
 #include <QSettings>
 
 #include "common.h"
 
-sim::sim():QObject() {
+sim::sim() {
     root = decoded.createElement("sim");
     decoded.appendChild(root);
     findConfig();
@@ -55,8 +54,8 @@ void sim::createXML(QString login, QString pass, QString server) {
     }
 }
 
-void sim::decoding(QFile &file) {
-    QSettings c(file.fileName(), QSettings::IniFormat);
+void sim::decoding(QString file) {
+    QSettings c(file, QSettings::IniFormat);
     c.beginGroup("jabber/Jabber");
     createXML(c.value("ID").toString(), decodePassword(c.value("Password").toString()), c.value("Server").toString());
     c.endGroup();
@@ -71,13 +70,9 @@ void sim::decoding(QFile &file) {
 }
 
 void sim::findConfig() {
-    QStringList list = dirList(homeDir()+".kde/share/apps/sim");
-    foreach(QString s, list) {
-        QFile file(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf");
-        if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-            decoding(file);
-    }
-
+    foreach(QString s, dirList(homeDir()+".kde/share/apps/sim"))
+        if (QFile::exists(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf"))
+            decoding(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf");
 }
 
 sim* sim::instance() {

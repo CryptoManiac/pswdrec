@@ -46,7 +46,7 @@
      <bool>false</bool>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <property name="enabled">
@@ -94,17 +94,14 @@
      <attribute name="title">
       <string>Kopete</string>
      </attribute>
-     <widget class="QTextEdit" name="textEdit_2">
+     <widget class="QTextBrowser" name="textBrowser_4">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>341</width>
-        <height>171</height>
+        <width>481</width>
+        <height>261</height>
        </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
       </property>
      </widget>
     </widget>

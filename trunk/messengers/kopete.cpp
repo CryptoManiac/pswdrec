@@ -1,16 +1,23 @@
 #include "kopete.h"
 
 #include <QFile>
-#include <QTextStream>
+#include <QStringList>
+#include <QDebug>
+
+#include <QSettings>
+#include <QtXml/QDomDocument>
+
 
 #include "common.h"
 
 
 kopete::kopete() {
+    root = decoded.createElement("kopete");
+    decoded.appendChild(root);
     findConfig();
 }
 
-QString kopete::decodePassword(const QString &pass)
+QString kopete::decodePassword(QString pass)
 {
     QString result;
     const QChar *unicode = pass.unicode();
@@ -19,34 +26,56 @@ QString kopete::decodePassword(const QString &pass)
     return result;
 }
 
-void kopete::decoding(const QString &path)
+void kopete::decoding(QString path)
 {
-    QFile file(path);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
-    QString login;
-    QString pass;
-    QTextStream in(&file);
-    while (!in.atEnd())
+    QSettings set(path, QSettings::IniFormat);
+    foreach (QString str, set.childGroups())
     {
-        QString line = in.readLine();
-        if (line.startsWith("AccountId="))
-            login = line.right(line.length() - 10);
-        if (line.startsWith("Password=")) {
-            pass = decodePassword(line.right(line.length() - 9));
-            decoded.append("Login: " + login + " Pass: " + pass);
-            pass.clear();
-            login.clear();
+        if (str.startsWith("Account_")) {
+         set.beginGroup(str);
+         QString login = set.value("AccountID").toString();
+         QString pass = decodePassword(set.value("Password").toString());
+         QString server = set.value("Server").toString();
+         createXML(login, pass, server);
+         set.endGroup();
         }
+    }
+}
+
+void kopete::createXML(QString login, QString pass, QString server) {
+    QDomElement q = decoded.createElement("Account");
+    root.appendChild(q);
+
+    QDomElement tag = decoded.createElement("Login");
+    q.appendChild(tag);
+    QDomText t = decoded.createTextNode(login);
+    tag.appendChild(t);
+
+    tag = decoded.createElement("Password");
+    q.appendChild(tag);
+    t = decoded.createTextNode(pass);
+    tag.appendChild(t);
+    if (!server.isEmpty()) {
+        tag = decoded.createElement("Server");
+        q.appendChild(tag);
+        t = decoded.createTextNode(server);
+        tag.appendChild(t);
     }
 }
 
 void kopete::findConfig()
 {
-    QFile file(homeDir() + ".kde4/share/config/kopeterc");
-    if (file.exists())
-        decoding(file.fileName());
-    file.setFileName(homeDir() + ".kde/share/config/kopeterc");
-    if (file.exists())
-        decoding(file.fileName());
+
+    if (QFile::exists(homeDir() + ".kde4/share/config/kopeterc"))
+        decoding(homeDir() + ".kde4/share/config/kopeterc");
+    if (QFile::exists(homeDir() + ".kde/share/config/kopeterc"))
+        decoding(homeDir() + ".kde/share/config/kopeterc");
 }
+
+kopete* kopete::instance() {
+    if (!instance_)
+        instance_ = new kopete();
+    return instance_;
+}
+
+kopete* kopete::instance_ = NULL;
