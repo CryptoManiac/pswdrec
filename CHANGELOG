@@ -1,3 +1,18 @@
+0.03 (24-05-2009)
+ - Oh fuck, i forgot about changelog =\
+ - Added im-clients:
+    Alicq
+    Gajim
+    MDC
+    Licq
+    Pidgin
+    SIM
+ - Added mail-client:
+   KMail
+ - Added ftp-client:
+   KFTPGrabber
+ - One week to session in unversity :)
+
 0.02 (26-04-2009)
  - psi now works well
  - Kopete works only 0.5x versions
