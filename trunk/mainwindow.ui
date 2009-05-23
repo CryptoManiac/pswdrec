@@ -212,7 +212,7 @@
     </widget>
     <widget class="QWidget" name="tab_11">
      <attribute name="title">
-      <string>Page</string>
+      <string>Gajim</string>
      </attribute>
      <widget class="QTextBrowser" name="textBrowser_8">
       <property name="geometry">
