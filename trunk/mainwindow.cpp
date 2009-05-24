@@ -11,6 +11,7 @@
 #include "messengers/alicq.h"
 #include "messengers/pidgin.h"
 #include "messengers/gajim.h"
+#include "messengers/sipcom.h"
 #include "kftpgrabber.h"
 #include "mail/kmail.h"
 
@@ -51,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(alicq::instance()->decoded, ui->textBrowser_6);
     Parser(pidgin::instance()->decoded, ui->textBrowser_7);
     Parser(gajim::instance()->decoded, ui->textBrowser_8);
-    qDebug() << gajim::instance()->decoded.toString();
+    qDebug() << sipcom::instance()->decoded.toString();
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
