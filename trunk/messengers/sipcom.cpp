@@ -26,7 +26,19 @@ void sipcom::decoding(QFile &file) {
                 if (q.childNodes().at(j).toElement().tagName() == "protocol") {
                     QDomElement p = q.childNodes().at(j).toElement();
                     for (int k = 0;k<p.childNodes().count();k++) {
-                        qDebug() << p.childNodes().at(k).toElement().tagName(); //"icq" "jabber"
+
+                        QDomElement Prot = p.childNodes().at(k).toElement();
+                         for (int l = 0;l<Prot.childNodes().count();l++) {
+                            QDomElement Acc = Prot.childNodes().at(l).toElement();
+                              //And the last :)
+
+                                for (int m = 0; m < Acc.childNodes().count();m++)
+                            {
+                                    qDebug() << Acc.childNodes().at(m).toElement().text();
+
+                                }
+
+                         }
                     }
                 }
             }
