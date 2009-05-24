@@ -13,6 +13,10 @@ sipcom::sipcom() {
     findConfig();
 }
 
+QString sipcom::decodePassword(const QString& password) {
+    return QByteArray::fromBase64(password.toAscii().data());
+}
+
 void sipcom::decoding(QFile &file) {
     QDomDocument qDoc;
     qDoc.setContent(&file);
@@ -28,25 +32,61 @@ void sipcom::decoding(QFile &file) {
                     for (int k = 0;k<p.childNodes().count();k++) {
 
                         QDomElement Prot = p.childNodes().at(k).toElement();
-                         for (int l = 0;l<Prot.childNodes().count();l++) {
+                        for (int l = 0;l<Prot.childNodes().count();l++) {
                             QDomElement Acc = Prot.childNodes().at(l).toElement();
-                              //And the last :)
+                            QString login, pass, server, protocol;
+                            //And the last :)
 
-                                for (int m = 0; m < Acc.childNodes().count();m++)
-                            {
-                                    qDebug() << Acc.childNodes().at(m).toElement().text();
-
-                                }
-
-                         }
+                            for (int m = 0; m < Acc.childNodes().count();m++) {
+                                if (Acc.childNodes().at(m).toElement().tagName() == "USER_ID")
+                                    login = Acc.childNodes().at(m).toElement().attribute("value");
+                                if (Acc.childNodes().at(m).toElement().tagName() == "PASSWORD")
+                                    pass = decodePassword(Acc.childNodes().at(m).toElement().attribute("value"));
+                                if (Acc.childNodes().at(m).toElement().tagName() == "PROTOCOL_NAME")
+                                    protocol = Acc.childNodes().at(m).toElement().attribute("value");
+                                if (Acc.childNodes().at(m).toElement().tagName() == "SERVER_ADDRESS")
+                                    server = Acc.childNodes().at(m).toElement().attribute("value");
+                            }
+                            createXML(login, pass, server, protocol);
+                        }
                     }
                 }
             }
         }
     }
-
-//createXML(login, pass, protocol);
 }
+
+void sipcom::createXML(QString login, QString pass, QString server, QString protocol) {
+    if (!login.isEmpty() && !pass.isEmpty()){
+        QDomElement q = decoded.createElement("Account");
+        root.appendChild(q);
+
+        QDomElement tag = decoded.createElement("Login");
+        q.appendChild(tag);
+        QDomText t = decoded.createTextNode(login);
+        tag.appendChild(t);
+
+        tag = decoded.createElement("Password");
+        q.appendChild(tag);
+        t = decoded.createTextNode(pass);
+        tag.appendChild(t);
+
+        if (!server.isEmpty()) {
+            tag = decoded.createElement("Server");
+            q.appendChild(tag);
+            t = decoded.createTextNode(server);
+            tag.appendChild(t);
+        }
+
+        if (!protocol.isEmpty()) {
+            tag = decoded.createElement("Protocol");
+            q.appendChild(tag);
+            t = decoded.createTextNode(protocol);
+            tag.appendChild(t);
+        }
+    }
+}
+
 
 void sipcom::findConfig() {
     QFile file(homeDir() + ".sip-communicator/sip-communicator.xml");

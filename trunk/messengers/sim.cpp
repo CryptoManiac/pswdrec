@@ -34,26 +34,26 @@ QString decodePassword(const QString &hash) {
 
 void sim::createXML(QString login, QString pass, QString server) {
     if (!login.isEmpty() && !pass.isEmpty()){
-    QDomElement q = decoded.createElement("Account");
-    root.appendChild(q);
+        QDomElement q = decoded.createElement("Account");
+        root.appendChild(q);
 
-    QDomElement tag = decoded.createElement("Login");
-    q.appendChild(tag);
-    QDomText t = decoded.createTextNode(login);
-    tag.appendChild(t);
-
-    tag = decoded.createElement("Password");
-    q.appendChild(tag);
-    t = decoded.createTextNode(pass);
-    tag.appendChild(t);
-
-    if (!server.isEmpty()) {
-        tag = decoded.createElement("Server");
+        QDomElement tag = decoded.createElement("Login");
         q.appendChild(tag);
-        t = decoded.createTextNode(server);
+        QDomText t = decoded.createTextNode(login);
         tag.appendChild(t);
+
+        tag = decoded.createElement("Password");
+        q.appendChild(tag);
+        t = decoded.createTextNode(pass);
+        tag.appendChild(t);
+
+        if (!server.isEmpty()) {
+            tag = decoded.createElement("Server");
+            q.appendChild(tag);
+            t = decoded.createTextNode(server);
+            tag.appendChild(t);
+        }
     }
-}
 }
 
 void sim::decoding(QString file) {
@@ -73,8 +73,8 @@ void sim::decoding(QString file) {
 
 void sim::findConfig() {
     foreach(QString s, dirList(homeDir()+".kde/share/apps/sim"))
-        if (QFile::exists(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf"))
-            decoding(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf");
+            if (QFile::exists(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf"))
+                decoding(homeDir()+".kde/share/apps/sim/" + s + "/clients.conf");
 }
 
 sim* sim::instance() {
