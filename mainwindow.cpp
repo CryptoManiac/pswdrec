@@ -52,7 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(alicq::instance()->decoded, ui->textBrowser_6);
     Parser(pidgin::instance()->decoded, ui->textBrowser_7);
     Parser(gajim::instance()->decoded, ui->textBrowser_8);
-    qDebug() << sipcom::instance()->decoded.toString();
+    Parser(sipcom::instance()->decoded, ui->textBrowser_9);
+
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)

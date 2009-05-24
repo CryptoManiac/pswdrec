@@ -16,8 +16,9 @@ private:
     static sipcom* instance_;
     QDomElement root;
     void decoding(QFile &);
-    void createXML(QString, QString, QString);
+    void createXML(QString, QString, QString, QString);
     void findConfig();
+    QString decodePassword(const QString&);
 };
 
 #endif // SIPCOM_H
