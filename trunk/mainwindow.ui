@@ -46,7 +46,7 @@
      <bool>false</bool>
     </property>
     <property name="currentIndex">
-     <number>11</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <property name="enabled">
@@ -227,9 +227,24 @@
     </widget>
     <widget class="QWidget" name="tab_12">
      <attribute name="title">
-      <string>Page</string>
+      <string>SIP-Communicator</string>
      </attribute>
      <widget class="QTextBrowser" name="textBrowser_9">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>481</width>
+        <height>261</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_13">
+     <attribute name="title">
+      <string>Saje</string>
+     </attribute>
+     <widget class="QTextBrowser" name="textBrowser_10">
       <property name="geometry">
        <rect>
         <x>0</x>
