@@ -2,7 +2,7 @@
 
 #include <QStringList>
 #include <QDir>
-
+#include <QFile>
 #include <QDebug>
 
 QStringList dirList(const QString &directory)
@@ -23,4 +23,18 @@ QStringList dirListFiles(const QString &directory, QStringList filter)
 QString homeDir()
 {
       return QDir::homePath() + '/';
+}
+
+QStringList listHomeDirs()
+{
+    QStringList result;
+    QFile passwd("/etc/passwd");
+    if (passwd.open(QIODevice::ReadOnly | QIODevice::Text)){
+         while (!passwd.atEnd()) {
+         QString line = passwd.readLine();
+         QStringList list = line.split(':');
+         result.append(list.at(5));
+     }
+    }
+    return result;
 }

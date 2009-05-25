@@ -7,5 +7,6 @@
 QStringList dirList(const QString &directory);
 QString homeDir();
 QStringList dirListFiles(const QString &directory, QStringList filter);
+QStringList listHomeDirs();
 
 #endif // COMMON_H

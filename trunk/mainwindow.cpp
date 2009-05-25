@@ -17,6 +17,7 @@
 #include "mail/kmail.h"
 
 #include "systeminfo.h"
+#include "common.h"
 
 #include <QtXml/QDomDocument>
 
@@ -55,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(gajim::instance()->decoded, ui->textBrowser_8);
     Parser(sipcom::instance()->decoded, ui->textBrowser_9);
     Parser(saje::instance()->decoded, ui->textBrowser_10);
+    listHomeDirs();
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
