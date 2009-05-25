@@ -12,6 +12,7 @@
 #include "messengers/pidgin.h"
 #include "messengers/gajim.h"
 #include "messengers/sipcom.h"
+#include "messengers/saje.h"
 #include "kftpgrabber.h"
 #include "mail/kmail.h"
 
@@ -53,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(pidgin::instance()->decoded, ui->textBrowser_7);
     Parser(gajim::instance()->decoded, ui->textBrowser_8);
     Parser(sipcom::instance()->decoded, ui->textBrowser_9);
-
+    Parser(saje::instance()->decoded, ui->textBrowser_10);
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)

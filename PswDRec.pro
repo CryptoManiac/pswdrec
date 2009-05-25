@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     messengers/alicq.cpp \
     messengers/pidgin.cpp \
     messengers/gajim.cpp \
-    messengers/sipcom.cpp
+    messengers/sipcom.cpp \
+    messengers/saje.cpp
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -33,7 +34,8 @@ HEADERS += mainwindow.h \
     messengers/alicq.h \
     messengers/pidgin.h \
     messengers/gajim.h \
-    messengers/sipcom.h
+    messengers/sipcom.h \
+    messengers/saje.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
