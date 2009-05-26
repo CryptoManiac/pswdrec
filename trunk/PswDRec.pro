@@ -8,11 +8,11 @@ SOURCES += main.cpp \
     systeminfo.cpp \
     common.cpp \
     kftpgrabber.cpp \
+    mail/kmail.cpp \
     messengers/psi.cpp \
     messengers/messengers.cpp \
     messengers/sim.cpp \
     messengers/kopete.cpp \
-    mail/kmail.cpp \
     messengers/mdc.cpp \
     messengers/licq.cpp \
     messengers/alicq.cpp \
@@ -24,11 +24,11 @@ HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
     kftpgrabber.h \
+    mail/kmail.h \
     messengers/psi.h \
     messengers/messengers.h \
     messengers/sim.h \
     messengers/kopete.h \
-    mail/kmail.h \
     messengers/mdc.h \
     messengers/licq.h \
     messengers/alicq.h \
