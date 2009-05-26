@@ -12,6 +12,10 @@ public:
 private:
 	SystemInfo();
 	static SystemInfo* instance_;
+        QString getOS();
+        QString localHostName();
+        QString kernelVersion();
+        QString currentUser();
 };
 
 #endif
