@@ -6,7 +6,7 @@
 SystemInfo::SystemInfo() : QObject() {
 }
 
-QString getOS() {
+QString SystemInfo::getOS() {
 
     QString os_str_ = "Unknown";
 
@@ -98,7 +98,7 @@ QString getOS() {
     }
     return os_str_;
 }
-QString localHostName() {
+QString SystemInfo::localHostName() {
     struct utsname u;
     uname(&u);
     QString hostName;
@@ -106,7 +106,7 @@ QString localHostName() {
     return hostName;
 }
 
-QString kernelVersion() {
+QString SystemInfo::kernelVersion() {
     struct utsname u;
     uname(&u);
     QString kernel;
@@ -114,11 +114,19 @@ QString kernelVersion() {
     return kernel;
 }
 
+QString SystemInfo::currentUser()
+{
+    char buffer[256];
+    FILE *f = popen("whoami", "r");
+    if (f)
+        return fgets(buffer, 255, f);
+    return QString();
+}
+
 QDomDocument SystemInfo::collect() {
     QDomDocument doc;
     QDomElement root = doc.createElement("System info");
     doc.appendChild(root);
-
 
     QDomElement tag = doc.createElement("Distro");
     root.appendChild(tag);
@@ -135,6 +143,12 @@ QDomDocument SystemInfo::collect() {
     root.appendChild(tag);
     t = doc.createTextNode(localHostName());
     tag.appendChild(t);
+
+    tag = doc.createElement("Current user");
+    root.appendChild(tag);
+    t = doc.createTextNode(currentUser());
+    tag.appendChild(t);
+
 
     return doc;
 }
