@@ -58,7 +58,15 @@ void ayttm::createXML(QString login, QString pass, QString server) {
 }
 
 void ayttm::decoding(QString file) {
+        QFile acFile(file);
 
+        if (acFile.open(QIODevice::ReadOnly |QIODevice::Text))
+        {
+            while (!acFile.atEnd())
+            {
+                    qDebug() << acFile.readLine();
+            }
+        }
 }
 
 void ayttm::findConfig() {

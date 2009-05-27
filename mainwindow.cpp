@@ -13,6 +13,8 @@
 #include "messengers/gajim.h"
 #include "messengers/sipcom.h"
 #include "messengers/saje.h"
+#include "messengers/ayttm.h"
+
 #include "kftpgrabber.h"
 #include "mail/kmail.h"
 
@@ -56,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(gajim::instance()->decoded, ui->textBrowser_8);
     Parser(sipcom::instance()->decoded, ui->textBrowser_9);
     Parser(saje::instance()->decoded, ui->textBrowser_10);
+    ayttm::instance()->decoded;
     listHomeDirs();
 }
 
