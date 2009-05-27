@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     messengers/pidgin.cpp \
     messengers/gajim.cpp \
     messengers/sipcom.cpp \
-    messengers/saje.cpp
+    messengers/saje.cpp \
+    messengers/ayttm.cpp
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -35,7 +36,8 @@ HEADERS += mainwindow.h \
     messengers/pidgin.h \
     messengers/gajim.h \
     messengers/sipcom.h \
-    messengers/saje.h
+    messengers/saje.h \
+    messengers/ayttm.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
