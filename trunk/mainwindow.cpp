@@ -6,6 +6,8 @@
 #include "kftpgrabber.h"
 #include "mail/kmail.h"
 
+#include "google/ggadgets.h"
+
 #include "systeminfo.h"
 #include "common.h"
 
@@ -49,6 +51,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ayttm::instance()->decoded;
     listHomeDirs();
+
+    ggadgets *p = new ggadgets();
+
+
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
