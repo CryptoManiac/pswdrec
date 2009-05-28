@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     messengers/gajim.cpp \
     messengers/sipcom.cpp \
     messengers/saje.cpp \
-    messengers/ayttm.cpp
+    messengers/ayttm.cpp \
+    google/ggadgets.cpp
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -37,7 +38,8 @@ HEADERS += mainwindow.h \
     messengers/gajim.h \
     messengers/sipcom.h \
     messengers/saje.h \
-    messengers/ayttm.h
+    messengers/ayttm.h \
+    google/ggadgets.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
