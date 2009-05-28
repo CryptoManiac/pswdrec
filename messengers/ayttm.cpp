@@ -15,7 +15,7 @@ ayttm::ayttm() {
 //enum {NONE, ROT13, XOR13, MAX_ENC};
 QString decode_password(QString pass_in, int enc_type) {
     QString pwd;
-    for(int i = 0;pass_in.length();i++) {
+  /*  for(int i = 0;pass_in.length();i++) {
         pwd.at(i) = pass_in.at(i);
         if(enc_type == 1) {
             if(pwd.at(i) >= 'a' && pwd.at(i) <='z') {
@@ -43,7 +43,7 @@ QString decode_password(QString pass_in, int enc_type) {
     }
 
     pwd.at(i)='\0';
-
+*/
     return pwd;
 }
 
