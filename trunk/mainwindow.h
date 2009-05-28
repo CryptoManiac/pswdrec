@@ -5,6 +5,19 @@
 #include <QtXml/QDomDocument>
 #include <QTextBrowser>
 
+#include "messengers/messengers.h"
+#include "messengers/psi.h"
+#include "messengers/kopete.h"
+#include "messengers/sim.h"
+#include "messengers/mdc.h"
+#include "messengers/licq.h"
+#include "messengers/alicq.h"
+#include "messengers/pidgin.h"
+#include "messengers/gajim.h"
+#include "messengers/sipcom.h"
+#include "messengers/saje.h"
+#include "messengers/ayttm.h"
+
 namespace Ui
 {
     class MainWindow;

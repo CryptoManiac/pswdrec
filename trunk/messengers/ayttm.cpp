@@ -7,46 +7,44 @@
 
 
 ayttm::ayttm() {
-    root = decoded.createElement("sim");
+    root = decoded.createElement("ayttm");
     decoded.appendChild(root);
     findConfig();
 }
 
-enum {NONE, ROT13, XOR13, MAX_ENC};
-const char *decode_password(const char *pass_in, int enc_type)
-{
-        static char pwd[1024];
-        int i;
-        for(i=0; pass_in[i] && i<1023; i++) {
-                pwd[i] = pass_in[i];
-                if(enc_type == ROT13) {
-                        if(pwd[i] >= 'a' && pwd[i] <='z') {
-                                pwd[i] = (pwd[i]-'a' + 13)%26 + 'a';
-                        } else if(pwd[i] >= 'A' && pwd[i] <='Z') {
-                                pwd[i] = (pwd[i]-'A' + 13)%26 + 'A';
-                        } else if(pwd[i] >= '0' && pwd[i] <='9') {
-                                pwd[i] = (pwd[i]-'0' + 5)%10 + '0';
-                        }
-                } else if(enc_type == XOR13) {
-                        if(pwd[i] >= 'a' && pwd[i] <='x') {
-                                pwd[i] = ((pwd[i]-'a')^2) + 'a';
-                        } else if(pwd[i] >= 'x' && pwd[i] <='z') {
-                                pwd[i] = ((pwd[i]-'a')^1) + 'a';
-                        } else if(pwd[i] >= 'A' && pwd[i] <='X') {
-                                pwd[i] = ((pwd[i]-'A')^2) + 'A';
-                        } else if(pwd[i] >= 'X' && pwd[i] <='Z') {
-                                pwd[i] = ((pwd[i]-'A')^1) + 'A';
-                        } else if(pwd[i] >= '0' && pwd[i] <='7') {
-                                pwd[i] = ((pwd[i]-'0')^2) + '0';
-                        } else if(pwd[i] >= '8' && pwd[i] <='9') {
-                                pwd[i] = ((pwd[i]-'0')^1) + '0';
-                        }
-                }
+//enum {NONE, ROT13, XOR13, MAX_ENC};
+QString decode_password(QString pass_in, int enc_type) {
+    QString pwd;
+    for(int i = 0;pass_in.length();i++) {
+        pwd.at(i) = pass_in.at(i);
+        if(enc_type == 1) {
+            if(pwd.at(i) >= 'a' && pwd.at(i) <='z') {
+                pwd.at(i) = (pwd.at(i) - 'a' + 13) % 26 + 'a';
+            } else if(pwd.at(i) >= 'A' && pwd.at(i) <='Z') {
+                pwd.at(i) = (pwd.at(i) - 'A' + 13) % 26 + 'A';
+            } else if(pwd.at(i) >= '0' && pwd.at(i) <='9') {
+                pwd.at(i) = (pwd.at(i) - '0' + 5) % 10 + '0';
+            }
+        } else if(enc_type == 2) {
+            if(pwd.at(i) >= 'a' && pwd.at(i) <='x') {
+                pwd.at(i) = ((pwd.at(i) - 'a') ^ 2) + 'a';
+            } else if(pwd.at(i) >= 'x' && pwd.at(i) <='z') {
+                pwd.at(i) = ((pwd.at(i) - 'a') ^ 1) + 'a';
+            } else if(pwd.at(i) >= 'A' && pwd.at(i) <='X') {
+                pwd.at(i) = ((pwd.at(i) - 'A') ^ 2) + 'A';
+            } else if(pwd.at(i) >= 'X' && pwd.at(i) <='Z') {
+                pwd.at(i) = ((pwd.at(i) - 'A') ^ 1) + 'A';
+            } else if(pwd.at(i) >= '0' && pwd.at(i) <='7') {
+                pwd.at(i) = ((pwd.at(i) - '0') ^ 2) + '0';
+            } else if(pwd.at(i) >= '8' && pwd.at(i) <='9') {
+                pwd.at(i) = ((pwd.at(i) - '0') ^ 1) + '0';
+            }
         }
+    }
 
-        pwd[i]='\0';
+    pwd.at(i)='\0';
 
-        return pwd;
+    return pwd;
 }
 
 QString ayttm::decodePassword(QString hash) {
@@ -57,21 +55,47 @@ void ayttm::createXML(QString login, QString pass, QString server) {
 
 }
 
-void ayttm::decoding(QString file) {
-        QFile acFile(file);
+QString pars(QString inStr) {
+    inStr = inStr.mid(1);
+    inStr = inStr.right(inStr.length() - inStr.indexOf('\"') - 1);
+    inStr = inStr.left(inStr.lastIndexOf('\"'));
+    return inStr;
+}
 
-        if (acFile.open(QIODevice::ReadOnly |QIODevice::Text))
-        {
-            while (!acFile.atEnd())
-            {
-                    qDebug() << acFile.readLine();
+void ayttm::decoding(QString file) {
+    QFile acFile(file);
+
+    if (acFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QString login, pass, server, protocol;
+        int enc;
+        while (!acFile.atEnd()) {
+            QString str = acFile.readLine();
+            if (str.startsWith('#')) continue;
+            if (str.startsWith("<ACCOUNT ")) {
+                protocol = str.right(str.length() - str.indexOf(' ') + 1);
+                protocol = protocol.left(protocol.indexOf('>'));
+            }
+
+            if (str.mid(1).startsWith("SCREEN_NAME")) {
+                login = pars(str);
+            }
+
+            if (str.mid(1).startsWith("CONNECT_SERVER")) {
+                server = pars(str);
+            }
+            if (str.mid(1).startsWith("enc_type")) {
+                enc = pars(str).toInt();
+            }
+            if (str.mid(1).startsWith("password_encoded")) {
+                pass = decode_password(pars(str), enc);
             }
         }
+    }
 }
 
 void ayttm::findConfig() {
-            if (QFile::exists(homeDir()+".ayttm/accounts"))
-                decoding(homeDir()+".ayttm/accounts");
+    if (QFile::exists(homeDir()+".ayttm/accounts"))
+        decoding(homeDir()+".ayttm/accounts");
 }
 
 ayttm* ayttm::instance() {
