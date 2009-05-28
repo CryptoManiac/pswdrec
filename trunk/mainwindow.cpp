@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     ayttm::instance()->decoded;
     listHomeDirs();
 
-    ggadgets *p = new ggadgets();
+    ggadgets::instance();
 
 
 }
