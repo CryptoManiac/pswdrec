@@ -12,6 +12,7 @@
 #include "common.h"
 
 #include <QtXml/QDomDocument>
+#include <QTextDocument>
 
 MainWindow::MainWindow(QWidget *parent)
 : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -51,9 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ayttm::instance()->decoded;
     listHomeDirs();
-
-    ggadgets::instance();
-
+    Parser(ggadgets::instance()->decoded, ui->textBrowser_11);
+    qDebug() << ggadgets::instance()->decoded.toString();
 
 }
 
@@ -65,8 +65,8 @@ void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
 
         for (int i = 0;i < nRoot.childNodes().count();i++) {
             QString sInfo;
-            sInfo += "<b>" + nRoot.childNodes().at(i).toElement().tagName() + ": </b>";
-            sInfo += nRoot.childNodes().at(i).toElement().text();
+            sInfo += "<b>" + Qt::escape(nRoot.childNodes().at(i).toElement().tagName()) + ": </b>";
+            sInfo += Qt::escape(nRoot.childNodes().at(i).toElement().text());
             qBrwsr->insertHtml(sInfo + " ");
         }
         qBrwsr->insertHtml("<br>");

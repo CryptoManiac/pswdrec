@@ -16,9 +16,9 @@ private:
     static ggadgets* instance_;
     QDomElement root;
     void decoding(QFile &);
-    void createXML(QString, QString);
+    void createXML(QString, QString, QDomDocument &);
     void findConfig();
-    QString decodePassword(QString);
+    QString decode(QString);
 };
 
 #endif // GGADGETS_H

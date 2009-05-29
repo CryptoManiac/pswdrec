@@ -107,9 +107,7 @@ void saje::createXML(QString login, QString pass, QString server, QString protoc
 void saje::decoding(QFile &file) {
         QDomDocument tempDoc;
         tempDoc.setContent(&file);
-
         QDomNode nRoot = tempDoc.documentElement();
-        qDebug() << nRoot.toElement().tagName();
         for (int i = 0;i < nRoot.childNodes().count();i++) {
                 if (nRoot.childNodes().at(i).toElement().tagName() == "account-data") {
                     QString login = nRoot.childNodes().at(i).toElement().attribute("username");
