@@ -49,59 +49,92 @@ std::string UnescapeValue(const std::string &input) {
 }
 
 ggadgets::ggadgets() {
-    QString qqq = "=A3X=16Zq=E5=95=CDA=99U=0E/";
-    std::string value_str = UnescapeValue(qqq.toStdString());
-    std::string temp(value_str);
-    Decrypt(temp, &value_str);
-   // qDebug() << value_str.data();
+//    QString qqq = "eF[n=94=BA=C7=FE=D7:Af=0F";
+//     std::string value_str = UnescapeValue(qqq.toStdString());
+//     std::string temp(value_str);
+//    Decrypt(temp, &value_str);
+//     qDebug() << value_str.data();
 
     root = decoded.createElement("ggadgets");
     decoded.appendChild(root);
     findConfig();
 }
 
-QString ggadgets::decodePassword(QString hash) {
+QString ggadgets::decode(QString hash) {
     QString result;
     std::string value_str = UnescapeValue(hash.toStdString());
     std::string temp(value_str);
+
     Decrypt(temp, &value_str);
     result = QString(value_str.data());
     return result;
 }
 
 void ggadgets::decoding(QFile &file){
-    //qDebug() << file;
     QDomDocument doc;
-        doc.setContent(&file);
-        QDomElement root = doc.documentElement();
-        QString login, pass;
-            for (int i = 0; i<root.childNodes().count(); i++) {
-                QDomElement temp = root.childNodes().at(i).toElement();
-                if (temp.toElement().attribute("encrypted").toLower() == "1") {
-                    if (temp.toElement().attribute("name").toLower() == "password") {
-                        pass = decodePassword(temp.toElement().toElement().toText().data());
-                        qDebug() << pass;
-                    }
+    doc.setContent(&file);
+    QDomElement root = doc.documentElement();
+    QString login, pass, other;
+    QDomDocument oth;
+    for (int i = 0; i<root.childNodes().count(); i++) {
+        QDomElement temp = root.childNodes().at(i).toElement();
+        if (temp.attribute("encrypted") == "1") {
+            if (temp.attribute("name").toLower() == "password") {
+                pass = decode(temp.text());
+                pass = pass.mid(1, pass.length() - 2); //fucking quotes
+            } else if (temp.attribute("name").toLower() == "username") {
+                login = decode(temp.text());
+                login = login.mid(1, login.length() - 2); //fucking quotes
+            } else {
+                other = decode(temp.text());
+                other = other.mid(1, other.length() - 2); //fucking quotes
+                QString tagName = temp.attribute("name").toLower();  //Make tagName lowercase
+                tagName = tagName.at(0).toUpper() + tagName.mid(1, tagName.length() - 1); //Make tagName first char uppercase
+                QDomElement tag = oth.createElement(tagName);
+                oth.appendChild(tag);
+                QDomText t = oth.createTextNode(other);
+                tag.appendChild(t);
+            }
+        } else {
+            if (temp.attribute("type") == "j") {
+                if (temp.attribute("name").toLower() == "password") {
+                    pass = temp.text();
+                } else if (temp.attribute("name").toLower() == "username") {
+                    login = temp.text();
+                } else {
+                    other = temp.text();
                 }
             }
+        }
+    }
+    createXML(login, pass, oth);
+
 }
 
-void ggadgets::createXML(QString login, QString pass){
-    if (!login.isEmpty() && !pass.isEmpty()){
-        QDomElement q = decoded.createElement("Account");
-        root.appendChild(q);
+void ggadgets::createXML(QString login, QString pass, QDomDocument &opt){
+    QDomElement q = decoded.createElement("Account");
+    root.appendChild(q);
+    QDomElement tag;
+    QDomText t;
 
-        QDomElement tag = decoded.createElement("Login");
+    if (!login.isEmpty()){
+        tag = decoded.createElement("Login");
         q.appendChild(tag);
-        QDomText t = decoded.createTextNode(login);
+        t = decoded.createTextNode(login);
         tag.appendChild(t);
-
+    }
+    if (!pass.isEmpty()){
         tag = decoded.createElement("Password");
         q.appendChild(tag);
         t = decoded.createTextNode(pass);
         tag.appendChild(t);
-
     }
+
+    if (!opt.isNull())
+    {
+        q.appendChild(opt);
+    }
+
 }
 
 void ggadgets::findConfig(){
@@ -110,8 +143,8 @@ void ggadgets::findConfig(){
     foreach(QString s, dirListFiles(homeDir()+".google/gadgets/options", gadgets)){
         QFile file(homeDir()+".google/gadgets/options/" + s);
         if (file.open(QIODevice::ReadOnly))
-                decoding(file);
-        }
+            decoding(file);
+    }
 }
 
 ggadgets* ggadgets::instance() {
