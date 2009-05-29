@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(ggadgets::instance()->decoded, ui->textBrowser_11);
     qDebug() << ggadgets::instance()->decoded.toString();
 
+
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
@@ -62,14 +63,15 @@ void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
     QDomNode nRoot = qDoc.documentElement().firstChild();
 
     while (!nRoot.isNull()){
-
+    if (nRoot.childNodes().count() > 0){
         for (int i = 0;i < nRoot.childNodes().count();i++) {
             QString sInfo;
-            sInfo += "<b>" + Qt::escape(nRoot.childNodes().at(i).toElement().tagName()) + ": </b>";
+            sInfo += "<b>" + nRoot.childNodes().at(i).toElement().tagName() + ": </b>";
             sInfo += Qt::escape(nRoot.childNodes().at(i).toElement().text());
             qBrwsr->insertHtml(sInfo + " ");
         }
-        qBrwsr->insertHtml("<br>");
+            qBrwsr->insertHtml("<br>");
+        }
         nRoot = nRoot.nextSiblingElement();
     }
 }

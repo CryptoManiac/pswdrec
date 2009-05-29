@@ -103,12 +103,17 @@ void ggadgets::decoding(QFile &file){
                     login = temp.text();
                 } else {
                     other = temp.text();
+                    QString tagName = temp.attribute("name").toLower();  //Make tagName lowercase
+                    tagName = tagName.at(0).toUpper() + tagName.mid(1, tagName.length() - 1); //Make tagName first char uppercase
+                    QDomElement tag = oth.createElement(tagName);
+                    oth.appendChild(tag);
+                    QDomText t = oth.createTextNode(other);
+                    tag.appendChild(t);
                 }
             }
         }
     }
     createXML(login, pass, oth);
-
 }
 
 void ggadgets::createXML(QString login, QString pass, QDomDocument &opt){
@@ -130,17 +135,26 @@ void ggadgets::createXML(QString login, QString pass, QDomDocument &opt){
         tag.appendChild(t);
     }
 
-    if (!opt.isNull())
-    {
-        q.appendChild(opt);
+    if (!opt.isNull()){
+        for (int i = 0;i < opt.childNodes().count();i++)
+        {
+            QDomElement el = opt.childNodes().at(i).toElement();
+            q.appendChild(el);
+        }
     }
-
 }
 
 void ggadgets::findConfig(){
+    //QByteArray h = QByteArray::fromBase64("DQAAAKAAAAB1zwookazM5o4H7woNYfSAlmk7qfJoIEf38xlGRobzEAGyjMWjZn07VMFoIv1UBJcVQJhoIQVefS-A4dTTpgjLqvq6hJtyvnRS-n7wztMEsgzgpu30eKOwOunoyZ6qmDoV-PuZUIdRIWmc3vcGwx0vouo72qXTFZAY9OeIZ8w3qXokfOlFDO54_kMyodtowbXgmERe9eHO0Q2gRfHr4oD4");
+    //qDebug() << h.replace('\0',' ');
     QStringList gadgets;
     gadgets.append("gadget-*.xml");
     foreach(QString s, dirListFiles(homeDir()+".google/gadgets/options", gadgets)){
+        QFile file(homeDir()+".google/gadgets/options/" + s);
+        if (file.open(QIODevice::ReadOnly))
+            decoding(file);
+    }
+    foreach(QString s, dirListFiles(homeDir()+".google/gadgets-plasma/options", gadgets)){
         QFile file(homeDir()+".google/gadgets/options/" + s);
         if (file.open(QIODevice::ReadOnly))
             decoding(file);
