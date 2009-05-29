@@ -49,7 +49,8 @@ std::string UnescapeValue(const std::string &input) {
 }
 
 ggadgets::ggadgets() {
-    std::string value_str = UnescapeValue("=A3X=16Zq=E5=95=CDA=99U=0E/");
+    QString qqq = "=A3X=16Zq=E5=95=CDA=99U=0E/";
+    std::string value_str = UnescapeValue(qqq.toStdString());
     std::string temp(value_str);
     Decrypt(temp, &value_str);
    // qDebug() << value_str.data();
@@ -59,22 +60,48 @@ ggadgets::ggadgets() {
     findConfig();
 }
 
+QString ggadgets::decodePassword(QString hash) {
+    QString result;
+    std::string value_str = UnescapeValue(hash.toStdString());
+    std::string temp(value_str);
+    Decrypt(temp, &value_str);
+    result = QString(value_str.data());
+    return result;
+}
+
 void ggadgets::decoding(QFile &file){
     //qDebug() << file;
     QDomDocument doc;
         doc.setContent(&file);
         QDomElement root = doc.documentElement();
+        QString login, pass;
             for (int i = 0; i<root.childNodes().count(); i++) {
-               // qDebug() << root.childNodes().at(i).toElement().tagName();
                 QDomElement temp = root.childNodes().at(i).toElement();
-                if (temp.toElement().attribute("name").toLower() == "password") {
-
+                if (temp.toElement().attribute("encrypted").toLower() == "1") {
+                    if (temp.toElement().attribute("name").toLower() == "password") {
+                        pass = decodePassword(temp.toElement().toElement().toText().data());
+                        qDebug() << pass;
+                    }
                 }
             }
 }
 
-void ggadgets::createXML(QString login, QString pass, QString server){
+void ggadgets::createXML(QString login, QString pass){
+    if (!login.isEmpty() && !pass.isEmpty()){
+        QDomElement q = decoded.createElement("Account");
+        root.appendChild(q);
 
+        QDomElement tag = decoded.createElement("Login");
+        q.appendChild(tag);
+        QDomText t = decoded.createTextNode(login);
+        tag.appendChild(t);
+
+        tag = decoded.createElement("Password");
+        q.appendChild(tag);
+        t = decoded.createTextNode(pass);
+        tag.appendChild(t);
+
+    }
 }
 
 void ggadgets::findConfig(){
