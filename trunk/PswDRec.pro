@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     messengers/sipcom.cpp \
     messengers/saje.cpp \
     messengers/ayttm.cpp \
-    google/ggadgets.cpp
+    google/ggadgets.cpp \
+    mysqladm.cpp
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -39,7 +40,8 @@ HEADERS += mainwindow.h \
     messengers/sipcom.h \
     messengers/saje.h \
     messengers/ayttm.h \
-    google/ggadgets.h
+    google/ggadgets.h \
+    mysqladm.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING

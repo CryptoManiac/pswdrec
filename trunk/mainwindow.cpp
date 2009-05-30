@@ -11,6 +11,8 @@
 #include "systeminfo.h"
 #include "common.h"
 
+#include "mysqladm.h"
+
 #include <QtXml/QDomDocument>
 #include <QTextDocument>
 
@@ -49,13 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(gajim::instance()->decoded, ui->textBrowser_8);
     Parser(sipcom::instance()->decoded, ui->textBrowser_9);
     Parser(saje::instance()->decoded, ui->textBrowser_10);
-
-    ayttm::instance()->decoded;
-    listHomeDirs();
     Parser(ggadgets::instance()->decoded, ui->textBrowser_11);
-    qDebug() << ggadgets::instance()->decoded.toString();
-
-
+    Parser(mysqladm::instance()->decoded, ui->textBrowser_12);
+    ayttm::instance()->decoded;
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
