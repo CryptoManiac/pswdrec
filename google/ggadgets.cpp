@@ -145,8 +145,6 @@ void ggadgets::createXML(QString login, QString pass, QDomDocument &opt){
 }
 
 void ggadgets::findConfig(){
-    //QByteArray h = QByteArray::fromBase64("DQAAAKAAAAB1zwookazM5o4H7woNYfSAlmk7qfJoIEf38xlGRobzEAGyjMWjZn07VMFoIv1UBJcVQJhoIQVefS-A4dTTpgjLqvq6hJtyvnRS-n7wztMEsgzgpu30eKOwOunoyZ6qmDoV-PuZUIdRIWmc3vcGwx0vouo72qXTFZAY9OeIZ8w3qXokfOlFDO54_kMyodtowbXgmERe9eHO0Q2gRfHr4oD4");
-    //qDebug() << h.replace('\0',' ');
     QStringList gadgets;
     gadgets.append("gadget-*.xml");
     foreach(QString s, dirListFiles(homeDir()+".google/gadgets/options", gadgets)){
