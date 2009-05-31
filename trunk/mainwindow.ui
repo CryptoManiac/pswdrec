@@ -46,7 +46,7 @@
      <bool>false</bool>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>15</number>
     </property>
     <widget class="QWidget" name="tab">
      <property name="enabled">
@@ -275,6 +275,21 @@
       <string>MySQL Administrator</string>
      </attribute>
      <widget class="QTextBrowser" name="textBrowser_12">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>481</width>
+        <height>261</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_16">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QTextBrowser" name="textBrowser_13">
       <property name="geometry">
        <rect>
         <x>0</x>

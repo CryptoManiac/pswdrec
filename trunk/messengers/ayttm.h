@@ -16,9 +16,10 @@ private:
     static ayttm* instance_;
     QDomElement root;
     void decoding(QString);
-    void createXML(QString, QString, QString);
+    void createXML(QString, QString, QString, QString);
     void findConfig();
-    QString decodePassword(QString);
+    const char* decode_password(const char*, int);
+    QString pars(QString);
 };
 
 #endif // AYTTM_H
