@@ -114,12 +114,37 @@ QString SystemInfo::kernelVersion() {
     return kernel;
 }
 
-QString SystemInfo::currentUser()
-{
+QString SystemInfo::currentUser() {
     char buffer[256];
     FILE *f = popen("whoami", "r");
     if (f)
         return fgets(buffer, 255, f);
+    return QString();
+}
+
+#include <QDebug>
+
+QString SystemInfo::uptime() {
+    QFile up("/proc/uptime");
+    if (up.open(QIODevice::ReadOnly)) {
+        QString buf = up.readLine();
+        buf = buf.left(buf.indexOf('.'));
+        long time = buf.toLong();
+        int days, hours, mins = 0;
+        mins = time / 60;
+        hours = mins / 60;
+        mins %= 60;
+        days = hours / 24;
+        hours %= 24;
+
+        QString res;
+        if (days > 0) res += QString::number(days) + " days ";
+        if (hours > 0) res += QString::number(hours) + " hours ";
+        if (mins > 0) res += QString::number(mins) + " mins";
+
+        return res;
+
+    }
     return QString();
 }
 
@@ -149,6 +174,10 @@ QDomDocument SystemInfo::collect() {
     t = doc.createTextNode(currentUser());
     tag.appendChild(t);
 
+    tag = doc.createElement("Uptime");
+    root.appendChild(tag);
+    t = doc.createTextNode(uptime());
+    tag.appendChild(t);
 
     return doc;
 }
