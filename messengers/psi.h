@@ -2,17 +2,22 @@
 #define PSI_H
 #include <QObject>
 
+#include <QFile>
+#include <QtXml/QDomDocument>
 
 class psi : QObject
 {
 public:
-    psi();
-    void findConfig();
-    QList<QString> decoded;
+    static psi* instance();
+    QDomDocument decoded;
 private:
+    psi();
+    static psi* instance_;
+    QDomElement root;
     QString decodePassword(const QString &pass, const QString &key);
-    void decoding(const QString &path);
-
+    void decoding(QFile &);
+    void findConfig();
+    void createXML(QString, QString, QString);
 };
 
 #endif // PSI_H

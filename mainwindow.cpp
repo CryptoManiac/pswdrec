@@ -7,30 +7,17 @@
 #include "mail/kmail.h"
 
 #include "google/ggadgets.h"
-
+#include "mysqladm.h"
 #include "systeminfo.h"
+
 #include "common.h"
 
-#include "mysqladm.h"
-
-#include <QtXml/QDomDocument>
-#include <QTextDocument>
 
 MainWindow::MainWindow(QWidget *parent)
 : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     getSystemInfo();
-
-    /*   psi* p = new psi();
-     * QString pass;
-     * for (int i = 0;i<p->decoded.count();i++)
-     * pass += p->decoded.at(i) + '\n';
-     * ui->textEdit->setText(pass);
-     * free(p);
-     * pass.clear();
-     *
-     */
 
     /*
      * kftpgrabber * o = new kftpgrabber();
@@ -54,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(ggadgets::instance()->decoded, ui->textBrowser_11);
     Parser(mysqladm::instance()->decoded, ui->textBrowser_12);
     Parser(ayttm::instance()->decoded, ui->textBrowser_13);
+    Parser(psi::instance()->decoded, ui->textBrowser_14);
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)

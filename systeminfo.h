@@ -16,6 +16,7 @@ private:
         QString localHostName();
         QString kernelVersion();
         QString currentUser();
+        QString uptime();
 };
 
 #endif
