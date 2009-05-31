@@ -49,12 +49,6 @@ std::string UnescapeValue(const std::string &input) {
 }
 
 ggadgets::ggadgets() {
-//    QString qqq = "eF[n=94=BA=C7=FE=D7:Af=0F";
-//     std::string value_str = UnescapeValue(qqq.toStdString());
-//     std::string temp(value_str);
-//    Decrypt(temp, &value_str);
-//     qDebug() << value_str.data();
-
     root = decoded.createElement("ggadgets");
     decoded.appendChild(root);
     findConfig();
