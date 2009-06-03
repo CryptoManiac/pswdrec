@@ -130,13 +130,13 @@
      <attribute name="title">
       <string>KMail</string>
      </attribute>
-     <widget class="QTextEdit" name="textEdit_5">
+     <widget class="QTextBrowser" name="textBrowser_15">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>341</width>
-        <height>171</height>
+        <width>481</width>
+        <height>261</height>
        </rect>
       </property>
      </widget>
@@ -299,7 +299,7 @@
      <x>0</x>
      <y>0</y>
      <width>481</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
