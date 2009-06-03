@@ -44,7 +44,6 @@ void kmail::createXML(QString login, QString pass, QString server) {
         t = decoded.createTextNode(server);
         tag.appendChild(t);
     }
-    qDebug() << decoded.toString();
 }
 
 void kmail::decoding(QString path)
@@ -54,7 +53,7 @@ void kmail::decoding(QString path)
         if (str.startsWith("Account ")) {
             set.beginGroup(str);
             QString login = set.value("login").toString();
-            QString pass = decodePassword(set.value("pass").toString());
+            QString pass = decodePassword(set.value("pass").toByteArray());
             QString server = set.value("host").toString();
             createXML(login, pass, server);
             set.endGroup();
