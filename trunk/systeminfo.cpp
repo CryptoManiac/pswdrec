@@ -122,8 +122,6 @@ QString SystemInfo::currentUser() {
     return QString();
 }
 
-#include <QDebug>
-
 QString SystemInfo::uptime() {
     QFile up("/proc/uptime");
     if (up.open(QIODevice::ReadOnly)) {

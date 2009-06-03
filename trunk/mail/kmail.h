@@ -2,16 +2,22 @@
 #define KMAIL_H
 
 #include <QObject>
+#include <QtXml/QDomDocument>
 
 class kmail : public QObject
 {
 public:
-    kmail();
-    void findConfig();
-    QList<QString> decoded;
+    static kmail* instance();
+    QDomDocument decoded;
+
 private:
-    QString decodePassword(const QString &pass);
-    void decoding(const QString &path);
+    kmail();
+    static kmail* instance_;
+    QDomElement root;
+    void decoding(QString);
+    void createXML(QString, QString, QString);
+    void findConfig();
+    QString decodePassword(const QString &);
 };
 
 #endif // KMAIL_H

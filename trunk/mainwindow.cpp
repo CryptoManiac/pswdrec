@@ -21,13 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     /*
      * kftpgrabber * o = new kftpgrabber();
-     *
-     * kmail* km = new kmail();
-     * for (int i = 0;i < km->decoded.count();i++)
-     * pass += km->decoded.at(i) + '\n';
-     * ui->textEdit_5->setText(pass);
-     * free(km);
-     * pass.clear();*/
+     */
+
 
     Parser(sim::instance()->decoded, ui->textBrowser_2);
     Parser(mdc::instance()->decoded, ui->textBrowser_3);
@@ -42,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(mysqladm::instance()->decoded, ui->textBrowser_12);
     Parser(ayttm::instance()->decoded, ui->textBrowser_13);
     Parser(psi::instance()->decoded, ui->textBrowser_14);
+    Parser(sim::instance()->decoded, ui->textBrowser_15);
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)

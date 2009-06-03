@@ -2,10 +2,16 @@
 
 #include <QFile>
 #include <QTextStream>
+#include <QSettings>
+#include <QStringList>
+
+#include <QDebug>
 
 #include "common.h"
 
 kmail::kmail() {
+    root = decoded.createElement("kmail");
+    decoded.appendChild(root);
     findConfig();
 }
 
@@ -18,29 +24,40 @@ QString kmail::decodePassword(const QString &pass)
     return result;
 }
 
-void kmail::decoding(const QString &path)
+
+void kmail::createXML(QString login, QString pass, QString server) {
+    QDomElement q = decoded.createElement("Account");
+    root.appendChild(q);
+
+    QDomElement tag = decoded.createElement("Login");
+    q.appendChild(tag);
+    QDomText t = decoded.createTextNode(login);
+    tag.appendChild(t);
+
+    tag = decoded.createElement("Password");
+    q.appendChild(tag);
+    t = decoded.createTextNode(pass);
+    tag.appendChild(t);
+    if (!server.isEmpty()) {
+        tag = decoded.createElement("Server");
+        q.appendChild(tag);
+        t = decoded.createTextNode(server);
+        tag.appendChild(t);
+    }
+    qDebug() << decoded.toString();
+}
+
+void kmail::decoding(QString path)
 {
-    QFile file(path);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
-    QString login;
-    QString pass;
-    QString host;
-    QTextStream in(&file);
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        if (line.startsWith("login="))
-            login = line.right(line.length() - 6);
-        if (line.startsWith("host="))
-            host = line.right(line.length() - 5);
-        if (line.startsWith("pass="))
-        {
-            pass = decodePassword(line.right(line.length() - 5));
-            decoded.append("Login: " + login + " Host: " + host + " Pass: " + pass);
-            pass.clear();
-            login.clear();
-            host.clear();
+   QSettings set(path, QSettings::IniFormat);
+       foreach(QString str, set.childGroups()) {
+        if (str.startsWith("Account ")) {
+            set.beginGroup(str);
+            QString login = set.value("login").toString();
+            QString pass = decodePassword(set.value("pass").toString());
+            QString server = set.value("host").toString();
+            createXML(login, pass, server);
+            set.endGroup();
         }
     }
 }
@@ -48,9 +65,19 @@ void kmail::decoding(const QString &path)
 void kmail::findConfig()
 {
     QFile file(homeDir() + ".kde4/share/config/kmailrc");
-    if (file.exists())
+    if (file.exists()) {
         decoding(file.fileName());
+        file.close();
+    }
     file.setFileName(homeDir() + ".kde/share/config/kmailrc");
     if (file.exists())
         decoding(file.fileName());
 }
+
+kmail* kmail::instance() {
+    if (!instance_)
+        instance_ = new kmail();
+    return instance_;
+}
+
+kmail* kmail::instance_ = NULL;
