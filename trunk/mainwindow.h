@@ -37,6 +37,7 @@ private:
 void Parser(QDomDocument qDoc, QTextBrowser *qBrwsr);
 
 private slots:
+    void on_pushButton_clicked();
     void on_actionExit_triggered();
     void on_actionAbout_triggered();
 };
