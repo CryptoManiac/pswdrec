@@ -46,7 +46,7 @@
      <bool>false</bool>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>16</number>
     </property>
     <widget class="QWidget" name="tab">
      <property name="enabled">
@@ -324,7 +324,7 @@
      <widget class="QLineEdit" name="lineEdit">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>30</y>
         <width>421</width>
         <height>22</height>
@@ -366,7 +366,7 @@
      <x>0</x>
      <y>0</y>
      <width>481</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     messengers/saje.cpp \
     messengers/ayttm.cpp \
     google/ggadgets.cpp \
-    mysqladm.cpp
+    mysqladm.cpp \
+    OpenOffice/upodt.cpp
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -41,7 +42,8 @@ HEADERS += mainwindow.h \
     messengers/saje.h \
     messengers/ayttm.h \
     google/ggadgets.h \
-    mysqladm.h
+    mysqladm.h \
+    OpenOffice/upodt.h
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
