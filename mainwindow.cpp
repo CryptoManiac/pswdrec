@@ -85,7 +85,8 @@ void MainWindow::on_actionAbout_triggered() {
 
 void MainWindow::on_pushButton_clicked()
 {
-     QString fileName = QFileDialog::getOpenFileName(this,"Open ODT", homeDir(), "OpenOffice Documents (*.odt)");
+     QString fileName = QFileDialog::getOpenFileName(this, "Open ODT", homeDir(), "OpenOffice Documents (*.odt)");
      if (!fileName.isNull())
         ui->lineEdit->setText(fileName);
 }
+
