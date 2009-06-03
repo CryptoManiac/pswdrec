@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(mysqladm::instance()->decoded, ui->textBrowser_12);
     Parser(ayttm::instance()->decoded, ui->textBrowser_13);
     Parser(psi::instance()->decoded, ui->textBrowser_14);
-    Parser(sim::instance()->decoded, ui->textBrowser_15);
+    Parser(kmail::instance()->decoded, ui->textBrowser_15);
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)
