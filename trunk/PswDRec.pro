@@ -43,10 +43,16 @@ HEADERS += mainwindow.h \
     messengers/ayttm.h \
     google/ggadgets.h \
     mysqladm.h \
-    OpenOffice/upodt.h
+    OpenOffice/upodt.h \
+    libltzip/include/qunzip.hh \
+    libltzip/include/qzip.hh
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
+INCLUDEPATH += libltzip/include \
+               libltzip
+
 LIBS += -lQtXml \
-    -lQtNetwork
-RESOURCES += 
+    -lQtNetwork \
+    -lltzip \
+    -llibltzip
