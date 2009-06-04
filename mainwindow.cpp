@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QFileDialog>
+#include <QtXml/QDomDocument>
+
 
 
 #include "kftpgrabber.h"
@@ -12,6 +14,7 @@
 #include "systeminfo.h"
 
 #include "common.h"
+#include "OpenOffice/upodt.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -85,8 +88,10 @@ void MainWindow::on_actionAbout_triggered() {
 
 void MainWindow::on_pushButton_clicked()
 {
-     QString fileName = QFileDialog::getOpenFileName(this, "Open ODT", homeDir(), "OpenOffice Documents (*.odt)");
-     if (!fileName.isNull())
+     QString fileName = QFileDialog::getOpenFileName(this, "Open ODT", homeDir(), "OpenOffice Documents (*.xml)");
+     if (!fileName.isNull()){
         ui->lineEdit->setText(fileName);
+        upodt::instance()->unRO(fileName);
+    }
 }
 
