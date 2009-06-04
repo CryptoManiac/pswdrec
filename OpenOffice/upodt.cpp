@@ -2,8 +2,13 @@
 
 #include <QTextStream>
 #include <QFile>
-
 #include <QDebug>
+
+#include "libltzip/include/qunzip.hh"
+#include "libltzip/include/qzip.hh"
+
+using namespace lt;
+
 upodt::upodt() {
 }
 
@@ -49,11 +54,16 @@ bool upodt::unRO(QString &fileN) {
         f.close();
         return true;
     }
+    analysis(fileN);
     return false;
 }
 
 QDomDocument upodt::analysis(QString &fileN) {
-
+QUnZip uz;
+            QFile f("/home/lastik/ODT/1.odt");
+            f.open(QIODevice::ReadOnly);
+uz.open(&f);
+qDebug() << uz.getFileCount();
 }
 
 upodt* upodt::instance() {
