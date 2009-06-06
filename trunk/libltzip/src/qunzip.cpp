@@ -49,6 +49,7 @@ QUnZip::QUnZip() {
 QUnZip::~QUnZip() {
     if (isOpen())
         close();
+    //_d->_unzFile = NULL;
     delete _d;
 }
 
@@ -170,7 +171,7 @@ bool QUnZip::getCurrentFile(QIODevice &d) {
     }
     delete []buf;
     ::unzCloseCurrentFile(_d->_unzFile);
-    if (!d.openMode() & QIODevice::Unbuffered)
+    if (d.openMode() & QIODevice::Unbuffered)
         d.close();
     if (len == 0) {
         return true;

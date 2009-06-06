@@ -144,6 +144,7 @@ QDomDocument upodt::analysis(QString &fileN) {
         }
     } while (uz.gotoNextFile());
     f.close();
+    uz.close();
 }
 
 upodt* upodt::instance() {
