@@ -28,6 +28,8 @@
 #include "unzip.h"
 #include "qtioapi.h"
 
+#include <QDebug>
+
 using namespace lt;
 
 struct QUnZip::QUnZipPrivate {
@@ -59,7 +61,7 @@ bool QUnZip::open(QIODevice *d) {
         qWarning("QUnZip::open File not readable.");
         return false;
     }
-    if (!d->isSequential()) {
+    if (d->isSequential()) {
         qWarning("QUnZip::open File doesn't support seeking.");
         return false;
     }
@@ -114,7 +116,7 @@ bool QUnZip::getGlobalComment(QString & comment) {
         qWarning("QUnZip::getGlobalComment unzGetGlobalComment failed.");
         return false;
     }
-    //!!!!!!!!comment.setLatin1(buf, bufsize);
+    comment = comment.fromLatin1(buf, bufsize);
     delete[] buf;
     return true;
 }
@@ -251,7 +253,7 @@ bool QUnZip::getCurrentFileInfo(QString &name,
         return false;
     }
     if (nt) {
-        //!!!!!!!!!name.setLatin1(nt, fi.size_filename);
+        name = name.fromLatin1(nt, fi.size_filename);
         delete[] nt;
     }
 

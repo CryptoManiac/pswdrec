@@ -3,6 +3,7 @@
 # -------------------------------------------------
 TARGET = PswDRec
 TEMPLATE = app
+CONFIG += qt debug
 SOURCES += main.cpp \
     mainwindow.cpp \
     systeminfo.cpp \
@@ -63,6 +64,7 @@ HEADERS += mainwindow.h \
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
+
 INCLUDEPATH += libltzip/include \
                libltzip
 

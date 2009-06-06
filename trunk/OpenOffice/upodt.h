@@ -3,12 +3,13 @@
 
 #include <QObject>
 #include <QtXml/QDomDocument>
+#include <QFile>
 
 class upodt : public QObject
 {
 public:
     static upodt* instance();
-    bool unRO(QString &);
+    bool unRO(QString &, bool, QString &);
     QDomDocument analysis(QString &);
 private:
     upodt();

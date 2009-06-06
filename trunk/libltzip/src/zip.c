@@ -311,7 +311,6 @@ local void ziplocal_putValue_inmemory (dest, x, nbByte)
 
 local uLong ziplocal_TmzDateToDosDate(ptm,dosDate)
     const tm_zip* ptm;
-    uLong dosDate;
 {
     uLong year = (uLong)ptm->tm_year;
     if (year>1980)

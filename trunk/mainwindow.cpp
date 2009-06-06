@@ -88,10 +88,11 @@ void MainWindow::on_actionAbout_triggered() {
 
 void MainWindow::on_pushButton_clicked()
 {
-     QString fileName = QFileDialog::getOpenFileName(this, "Open ODT", homeDir(), "OpenOffice Documents (*.xml)");
+     QString fileName = QFileDialog::getOpenFileName(this, "Open ODT", homeDir(), "OpenOffice Documents (*.odt)");
      if (!fileName.isNull()){
         ui->lineEdit->setText(fileName);
-        upodt::instance()->unRO(fileName);
+        //upodt::instance()->unRO(fileName, false);
+        upodt::instance()->analysis(fileName);
     }
 }
 
