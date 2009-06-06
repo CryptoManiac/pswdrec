@@ -23,7 +23,14 @@ SOURCES += main.cpp \
     messengers/ayttm.cpp \
     google/ggadgets.cpp \
     mysqladm.cpp \
-    OpenOffice/upodt.cpp
+    OpenOffice/upodt.cpp \
+    libltzip/src/ioapi.c \
+    libltzip/src/qunzip.cpp \
+    libltzip/src/qtioapi.cpp \
+    libltzip/src/qzip.cpp \
+    libltzip/src/unzip.c \
+    libltzip/src/zip.c
+
 HEADERS += mainwindow.h \
     systeminfo.h \
     common.h \
@@ -45,12 +52,18 @@ HEADERS += mainwindow.h \
     mysqladm.h \
     OpenOffice/upodt.h \
     libltzip/include/qunzip.hh \
-    libltzip/include/qzip.hh
+    libltzip/include/qzip.hh \
+    libltzip/src/crypt.h  \
+    libltzip/src/ioapi.h \
+    libltzip/src/unzip.h \
+    libltzip/src/qtioapi.h \
+    libltzip/src/zip.h
+
+
 FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
 INCLUDEPATH += libltzip/include \
                libltzip
 
-LIBS += -lQtXml \
-    -lQtNetwork
+LIBS += -lQtXml
