@@ -60,7 +60,7 @@ bool QZip::open(QIODevice *d, bool append /*= false */) {
         qWarning("QZip::open File not open for read and write.");
         return false;
     }
-    if (!d->isSequential()) {
+    if (d->isSequential()) {
         qWarning("QZip::open File doesn't support seeking.");
         return false;
     }

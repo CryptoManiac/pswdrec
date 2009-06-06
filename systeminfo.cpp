@@ -21,6 +21,7 @@ QString SystemInfo::getOS() {
         LinuxNone = 0,
 
         LinuxMandrake,
+        LinuxUbuntu,
         LinuxDebian,
         LinuxRedHat,
         LinuxGentoo,
@@ -29,6 +30,7 @@ QString SystemInfo::getOS() {
         LinuxConectiva,
         LinuxCaldera,
         LinuxLFS,
+
 
         LinuxASP, // Russian Linux distros
         LinuxALT,
@@ -51,6 +53,7 @@ QString SystemInfo::getOS() {
         QString name;
     } osInfo[] = {
         { LinuxMandrake,	OsUseFile,	"/etc/mandrake-release",	"Mandrake Linux"	},
+        { LinuxUbuntu,		OsUseName,	"/etc/lsb-release",		"Ubuntu Linux"		},
         { LinuxDebian,		OsAppendFile,	"/etc/debian_version",		"Debian GNU/Linux"	},
         { LinuxGentoo,		OsUseFile,	"/etc/gentoo-release",		"Gentoo Linux"		},
         { LinuxSlackware,	OsAppendFile,	"/etc/slackware-version",	"Slackware Linux"	},
@@ -94,6 +97,7 @@ QString SystemInfo::getOS() {
             }
 
             break;
+            f.close();
         }
     }
     return os_str_;
