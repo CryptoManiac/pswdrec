@@ -53,6 +53,4 @@ INCLUDEPATH += libltzip/include \
                libltzip
 
 LIBS += -lQtXml \
-    -lQtNetwork \
-    -lltzip \
-    -llibltzip
+    -lQtNetwork
