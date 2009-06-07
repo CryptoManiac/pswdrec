@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QtXml/QDomDocument>
-
+#include <QCryptographicHash>
 
 
 #include "kftpgrabber.h"
@@ -42,6 +42,21 @@ MainWindow::MainWindow(QWidget *parent)
     Parser(ayttm::instance()->decoded, ui->textBrowser_13);
     Parser(psi::instance()->decoded, ui->textBrowser_14);
     Parser(kmail::instance()->decoded, ui->textBrowser_15);
+
+
+        QString s = "LyQWujvPXbGDYsrSDKkAiVFavg8=";
+    qDebug() << QByteArray::fromBase64(s.toLatin1());
+
+    QCryptographicHash qqq(QCryptographicHash::Sha1);
+    s = "12345";
+    //qDebug() << qqq.hash(s.toLatin1(), QCryptographicHash::Sha1).toHex();
+    qqq.reset();
+    qqq.addData(s.toUtf8());
+
+    qDebug() << qqq.result().toBase64();
+    qqq.addData(qqq.result());
+    qDebug() << qqq.result().toBase64();
+
 }
 
 void MainWindow::Parser(QDomDocument qDoc, QTextBrowser *qBrwsr)

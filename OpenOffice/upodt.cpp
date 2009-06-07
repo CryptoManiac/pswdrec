@@ -1,7 +1,7 @@
 #include "upodt.h"
 
 #include <QTextStream>
-#include <QFile>
+
 #include <QDebug>
 
 #include "libltzip/include/qunzip.hh"
@@ -115,7 +115,10 @@ bool upodt::unRO(QString &fileN, bool check /* For checking RO-files*/ ,
  * zipFile.writeBlock(newZip.buffer());
  * }
  */
-
+/*
+<Readonly>
+<RedLineProtection>
+*/
 QDomDocument upodt::analysis(QString &fileN) {
     QUnZip uz;
     QFile f(fileN);

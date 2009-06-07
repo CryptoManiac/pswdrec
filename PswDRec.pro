@@ -65,7 +65,6 @@ FORMS += mainwindow.ui
 OTHER_FILES += CHANGELOG \
     COPYING
 
-INCLUDEPATH += libltzip/include \
-               libltzip
+INCLUDEPATH += libltzip/include
 
 LIBS += -lQtXml
