@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QCryptographicHash qqq(QCryptographicHash::Sha1);
     s = "12345";
-    //qDebug() << qqq.hash(s.toLatin1(), QCryptographicHash::Sha1).toHex();
+    qDebug() << qqq.hash(s.toUtf8(), QCryptographicHash::Sha1);
     qqq.reset();
     qqq.addData(s.toUtf8());
 
