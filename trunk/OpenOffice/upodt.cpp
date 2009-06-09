@@ -20,7 +20,6 @@ QDomElement unROel() {
     oth.appendChild(newN);
     QDomText t = oth.createTextNode("false");
     newN.appendChild(t);
-    qDebug() << oth.toString();
     return newN;
 }
 
@@ -119,6 +118,11 @@ bool upodt::unRO(QString &fileN, bool check /* For checking RO-files*/ ,
 <Readonly>
 <RedLineProtection>
 */
+
+void createXML(QDomDocument anRes, QDomElement el, QString param, QString val) {
+
+}
+
 QDomDocument upodt::analysis(QString &fileN) {
     QUnZip uz;
     QFile f(fileN);
@@ -126,7 +130,6 @@ QDomDocument upodt::analysis(QString &fileN) {
     if (!f.open(QIODevice::ReadWrite)) { return QDomDocument(); }
     if (!uz.open(&f)) { return QDomDocument(); }
     if (!uz.locateFile("settings.xml", true)) { return QDomDocument(); }
-
     uz.gotoFirstFile();
     QString name, word1, word2;
     do {

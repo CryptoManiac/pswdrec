@@ -11,6 +11,7 @@ public:
     static upodt* instance();
     bool unRO(QString &, bool, QString &);
     QDomDocument analysis(QString &);
+    QDomDocument analysed;
 private:
     upodt();
     static upodt* instance_;
